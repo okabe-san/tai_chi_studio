@@ -1,7 +1,7 @@
 exports.up = (knex, Promise) => {
-  knex.schema.createTable('classes_users', (table) => {
+  return knex.schema.createTable('classes_users', (table) => {
     table.increments();
-    table.integer('instructor_id').references('id').inTable('instructors');
+    table.integer('user_id').references('id').inTable('users');
     table.integer('class_id').references('id').inTable('classes');
   });
 };

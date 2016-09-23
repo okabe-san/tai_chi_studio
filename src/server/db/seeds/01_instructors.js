@@ -2,19 +2,19 @@ exports.seed = function(knex, Promise) {
   return Promise.all([
     knex('instructors').insert({
       id: 1,
-      name: 'Alias Montoya',
+      names: 'Alias Montoya',
       biography: 'test',
       photo_url: 'test'
     }),
     knex('instructors').insert({
       id: 2,
-      name: 'Gina DeBell',
+      names: 'Gina DeBell',
       biography: 'test',
       photo_url: 'test'
     }),
     knex('instructors').insert({
       id: 3,
-      name: 'Akiko Okabe',
+      names: 'Akiko Okabe',
       biography: 'test',
       photo_url: 'test'
     })
