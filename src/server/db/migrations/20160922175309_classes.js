@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
     table.string('day').notNullable();
     table.string('start_time').notNullable();
     table.string('end_time').notNullable();
-  })
+  });
 
 };
 

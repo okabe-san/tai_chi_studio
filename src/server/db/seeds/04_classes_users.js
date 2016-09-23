@@ -14,6 +14,6 @@ exports.seed = function(knex, Promise) {
       id: 3,
       instructor_id: 3,
       class_id: 1
-    }),
+    })
   ]);
 };
