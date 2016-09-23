@@ -12,4 +12,17 @@ router.get('/signin', function (req, res, next) {
   res.render('validation/signin');
 });
 
+//gets to the page that allows a user to log in (not a new user)
+router.get('/edit/:id', function (req, res, next) {
+  res.render('users_edit_profile');
+
+  //select from users by id
+  //populate edit fields
+  //
+});
+
+router.post('/edit/:id', function (req, res, next) {
+  res.render('users_edit_profile');
+});
+
 module.exports = router;

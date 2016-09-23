@@ -2,15 +2,15 @@ const faker = require('faker');
 
 exports.seed = function(knex, Promise) {
     let numberOfArrays = new Array(20);
-    let arrayOfUsers = []
+    let arrayOfUsers = [];
     Array.from(numberOfArrays).map(() => {
         return createUsers(knex);
       });
     return Promise.all(arrayOfUsers);
   };
 
-  function createUsers (knex) {
-    return knex('users')
+function createUsers (knex) {
+  return knex('users')
     .insert({
       first_name: faker.name.firstName(),
       last_name: faker.name.lastName(),
@@ -22,4 +22,4 @@ exports.seed = function(knex, Promise) {
       zip: faker.address.zipCode(),
       comments: faker.lorem.sentence()
     });
-  }
+}
