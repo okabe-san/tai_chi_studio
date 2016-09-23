@@ -2,7 +2,7 @@ const faker = require('faker');
 
 exports.seed = function(knex, Promise) {
     let numberOfArrays = new Array(20);
-    let arrayOfUsers = []
+    let arrayOfUsers = [];
     Array.from(numberOfArrays).map(() => {
         return createUsers(knex);
       });
