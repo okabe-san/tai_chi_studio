@@ -94,7 +94,7 @@ exports.seed = function(knex, Promise) {
           day: 'Thursday',
           start_time: '09:00 am',
           end_time: '010:00 am'
-        }),
+        })
       ]);
     });
 };
