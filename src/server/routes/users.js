@@ -14,11 +14,13 @@ router.get('/signin', function (req, res, next) {
 
 //gets to the page that allows a user to log in (not a new user)
 router.get('/edit/:id', function (req, res, next) {
-  res.render('users_edit_profile');
 
   //select from users by id
   //populate edit fields
   //
+
+
+  res.render('users_edit_profile');
 });
 
 router.post('/edit/:id', function (req, res, next) {

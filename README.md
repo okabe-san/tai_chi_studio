@@ -1,7 +1,7 @@
 Application Name: Tai Chi Studio
 
 About the Application: 
-Tai Chi Studio will allow a user to view all classes at a Tai Chi studio.  The user will be able to select options to search for a particular instructor, class type, or time.
+Tai Chi Studio will allow a user to view all class at a Tai Chi studio.  The user will be able to select options to search for a particular instructor, class type, or time.
 The user will also be able to write a review for an instructor when signed in. 
 
 Technologies Used:
