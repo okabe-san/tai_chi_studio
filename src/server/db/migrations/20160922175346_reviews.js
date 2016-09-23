@@ -1,11 +1,11 @@
 exports.up = (knex, Promise) => {
-  return knex.schema.createTable('reviews', (table) => {
+  return knex.schema.createTable('review', (table) => {
     table.increments();
-    table.string('review').notNullable();
-    table.integer('instructor_id').references('id').inTable('instructors').notNullable();
+    table.text('review').notNullable();
+    table.integer('instructor_id').references('id').inTable('instructor').notNullable();
   });
 };
 
 exports.down = (knex, Promise) => {
-  return knex.schema.dropTable('reviews');
+  return knex.schema.dropTable('review');
 };
