@@ -17,6 +17,6 @@ exports.seed = function(knex, Promise) {
       name: 'Akiko Okabe',
       biography: 'test',
       photo_url: 'test'
-    }),
+    })
   ]);
 };

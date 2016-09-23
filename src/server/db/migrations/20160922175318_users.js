@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
     table.string('zip').notNullable();
     table.boolean('liability').notNullable();
     table.string('comments');
-  })
+  });
 };
 
 exports.down = function(knex, Promise) {
