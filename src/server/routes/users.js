@@ -18,8 +18,6 @@ router.get('/edit/:id', function (req, res, next) {
   //select from users by id
   //populate edit fields
   //
-
-
   res.render('users_edit_profile');
 });
 

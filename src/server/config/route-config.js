@@ -6,8 +6,8 @@
 
     // *** routes *** //
     const routes = require('../routes/index');
-    const class = require('../routes/class');
-    const user = require('../routes/user');
+    const classes = require('../routes/classes');
+    const user = require('../routes/users');
     // const instructor = require('../routes/instructor');
 
     // *** register routes *** //
