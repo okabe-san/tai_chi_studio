@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
     table.string('city').notNullable();
     table.string('state').notNullable();
     table.string('zip').notNullable();
-    table.boolean('liability').notNullable();
+    table.boolean('liability').notNullable().defaultTo(true);
     table.string('comments');
   });
 };
