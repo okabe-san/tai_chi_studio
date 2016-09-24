@@ -7,14 +7,14 @@
     // *** routes *** //
     const routes = require('../routes/index');
     const classes = require('../routes/classes');
-    const user = require('../routes/users');
-    // const instructor = require('../routes/instructor');
+    const users = require('../routes/users');
+    const instructors = require('../routes/instructors');
 
     // *** register routes *** //
     app.use('/', routes);
     app.use('/classes', classes);
-    app.use('/user', user);
-    // app.use('/instructor', instructor);
+    app.use('/users', users);
+    app.use('/instructors', instructors);
   };
 
 })(module.exports);
