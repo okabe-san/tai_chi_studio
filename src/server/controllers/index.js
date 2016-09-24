@@ -7,7 +7,3 @@ function sum(num1, num2, callback) {
     callback(null, total);
   }
 }
-
-module.exports = {
-  sum
-};
