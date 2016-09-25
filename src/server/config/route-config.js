@@ -12,7 +12,7 @@
 
     // *** register routes *** //
     app.use('/', routes);
-    app.use('/class', classes);
+    app.use('/classes', classes);
     app.use('/users', users);
     app.use('/instructors', instructors);
   };

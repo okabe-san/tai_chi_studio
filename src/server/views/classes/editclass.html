@@ -5,7 +5,66 @@
 {% block content %}
 
   <div class="container">
-    <h1>ALLOWS ADMIN TO EDIT THE INFORMATION ABOUT A CLASS </h1>
-  </div>
+    <h1>Edit Class Information</h1>
+    <br><br>
+    <form class="form-horizontal">
 
+    <select class="form-control">
+      <option>Select Class Name</option>
+      {% for class in classes %}
+      <option name="name">{{class.name}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <select class="form-control">
+      <option>Select Instructor ID</option>
+      {% for instructor in instructors %}
+      <option name="instructor_id">{{instructor.instructor_id}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <select class="form-control">
+      <option>Select Day of Class</option>
+      {% for day in days %}
+      <option name="day">{{day.day}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <select class="form-control">
+      <option>Select Start Time</option>
+      {% for start in starts %}
+      <option name="start_time">{{start.start_time}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <select class="form-control">
+      <option>Select End Time</option>
+      {% for end in ends %}
+      <option name="end_time">{{end.end_time}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <select class="form-control">
+      <option>Select Class Size</option>
+      {% for size in sizes %}
+      <option name="size">{{size.size}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    <select class="form-control">
+      <option>Select Class Description</option>
+      {% for description in descriptions %}
+      <option name="description">{{description.description}}</option>
+      {% endfor %}
+    </select>
+    <br>
+
+    </form>
+  </div>
 {% endblock %}
