@@ -1,5 +1,5 @@
 (function () {
 
-  console.log('sanity check!');
+  console.log('main sanity check!');
 
 })();
