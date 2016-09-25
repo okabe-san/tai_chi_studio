@@ -5,7 +5,17 @@
 {% block content %}
 
   <div class="container">
-    <h1>instructor Bio</h1>
+    <h1>Instructors:</h1>
+    {% for instructor in instructor %}
+      <a href="/instructors/      {{instructor.id}}">{{instructor.names}}</a>
+      <br>
+      {{instructor.biography}}
+      <br>
+      {{instructor.photo_url}}
+      <br>
+      {{instructor.rating | safe}}
+      <br>
+    {% endfor %}
   </div>
 
 {% endblock %}

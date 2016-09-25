@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <section class="col-md-4">
+      <h1>Instructor:</h1>
+      {{instructor[0].names}}
+      <br>
+        <!-- {{instructor.photo_url}} -->
+      {{instructor[0].biography}}
+      <br>
+      <a href="/instructors" type="button" class="btn btn-success form-button">Back</a>
+    </section>
+    <section class="col-md-8">
+      <h1>Instructor Reviews:</h1>
+      {% for instructor in instructor %}
+        {{instructor.review}}
+        <br>
+        {{instructor.rating | safe}}
+        <br>
+      {% endfor %}
+    </section>
+  </div>
+</div>
+
+{% endblock %}

@@ -10,18 +10,18 @@ router.get('/', function (req, res, next) {
   .then((results) => {
     const renderObject = {};
     renderObject.class = results;
-    res.render('class/class', renderObject);
+    res.render('classes/classes', renderObject);
   });
 });
 
 //gets ONE class
 router.get('/:id/class', function (req, res, next) {
-  res.render('class/class');
+  res.render('classes/classes');
 });
 
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
-  res.render('class/editclass');
+  res.render('classes/editclasses');
 });
 
 module.exports = router;
