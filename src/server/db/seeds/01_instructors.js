@@ -1,21 +1,27 @@
 exports.seed = function(knex, Promise) {
   return Promise.all([
-    knex('instructor').insert({
+    knex('instructors').insert({
       id: 1,
-      names: 'Alias Montoya',
+      name: 'Alias Montoya',
       biography: 'test',
       photo_url: 'test'
     }),
-    knex('instructor').insert({
+    knex('instructors').insert({
       id: 2,
-      names: 'Gina DeBell',
+      name: 'Gina DeBell',
       biography: 'test',
       photo_url: 'test'
     }),
-    knex('instructor').insert({
+    knex('instructors').insert({
       id: 3,
-      names: 'Akiko Okabe',
+      name: 'Akiko Okabe',
       biography: 'test',
+      photo_url: 'test'
+    }),
+    knex('instructors').insert({
+      id: 4,
+      name: 'Phil Benz',
+      biography: 'BAMF',
       photo_url: 'test'
     })
   ]);
