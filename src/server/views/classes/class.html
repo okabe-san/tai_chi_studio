@@ -47,16 +47,16 @@
           </tr>
           {% for user in users %}
           <tr>
-            <td>user.liability</td>
-            <td>user.first_name</td>
-            <td>user.last_name</td>
-            <td>user.email</td>
-            <td>user.address_line_1</td>
-            <td>user.address_line_2</td>
-            <td>user.city</td>
-            <td>user.state</td>
-            <td>user.zip</td>
-            <td>user.comments</td>
+            <td>{{user.liability}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.address_line_1}}</td>
+            <td>{{user.address_line_2}}</td>
+            <td>{{user.city}}</td>
+            <td>{{user.state}}</td>
+            <td>{{user.zip}}</td>
+            <td>{{user.comments}}</td>
             <td><a href=""><button type="button" class="btn btn-primary edit_user"  name="{{user.id}}">Edit User</button></a></td>
             <td><a href=""><button type="button" class="btn btn-danger delete_user" name="{{user.id}}" data-id={{user.id}}>Delete User</button></a></td>
           </tr>
