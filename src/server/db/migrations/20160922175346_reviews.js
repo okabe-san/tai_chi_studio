@@ -3,7 +3,7 @@ exports.up = (knex, Promise) => {
     table.increments();
     table.text('review').notNullable();
     table.integer('rating').notNullable();
-    table.integer('instructor_id').references('id').inTable('instructor').notNullable();
+    table.integer('instructor_id').references('id').inTable('instructors').notNullable();
   });
 };
 
