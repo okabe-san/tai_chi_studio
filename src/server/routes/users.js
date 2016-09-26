@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
+const bcrypt = require('bcrypt');
 
 //get the the page that allows a user to sign up with the studio (new user)
 router.get('/signup', function (req, res, next) {
@@ -33,11 +34,9 @@ router.get('/verify', function (req, res, next) {
 
 //get the the page that allows a user to sign up with the studio (new user)
 router.post('/signup', function (req, res, next) {
-
   // Hash the password with the salt
   //we should use bcrypt here to store the password
-
-  console.log('here is the body: ', req.body);
+  var hash = bcrypt.hashSync(req.body.password, 10);
 
   knex('users')
   .returning('id')
@@ -52,11 +51,12 @@ router.post('/signup', function (req, res, next) {
     zip: req.body.zip,
     liability: req.body.liability,
     comments: req.body.comments,
-    password: req.body.password
+    password: hash
   })
   .then((results) => {
       if (results) {
-        res.render('users');
+        console.log('Success');
+        res.send(200);
       } else {
         res.status(500).send({
           status: 'error',
@@ -74,6 +74,28 @@ router.post('/signup', function (req, res, next) {
 //gets to the page that allows a user to log in (not a new user)
 router.get('/signin', function (req, res, next) {
   res.render('validation/signin');
+});
+
+router.post('/signin', function (req, res, next) {
+  knex('users')
+  .where({
+    email: req.body.email
+  })
+  .select('password')
+  .then((results) => {
+    if(bcrypt.compareSync(req.body.password, results[0].password)) {
+      res.redirect('/classes');
+    } else {
+      res.status(500).send({
+        status: 'error',
+        message: 'error'
+      });
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500);
+  });
 });
 
 //gets to the page that allows a user to log in (not a new user)
