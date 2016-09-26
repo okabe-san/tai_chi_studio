@@ -3,18 +3,41 @@ const router = express.Router();
 const knex = require('../db/knex');
 
 //gets ALL class
-router.get('/', function (req, res, next) {
-  knex('class')
-  .join('instructor', 'instructor.id', 'instructor_id')
-  .select('*')
+router.get('/', (req, res, next) => {
+  let getClasses = knex('classes').select();
+  let getInstructors = knex('instructors').select();
+  Promise.all([
+    getClasses,
+    getInstructors
+  ])
   .then((results) => {
     const renderObject = {};
-    renderObject.class = results;
-    res.render('classes/classes', renderObject);
+    renderObject.classes = results[0];
+    renderObject.instructors = results[1];
+    res.send(renderObject);
   });
 });
 //alias is above this line
 ///gina is below this line
+
+router.get('/new',(req, res, next) => {
+  let getClasses = knex('classes').select();
+  let getInstructors = knex('instructors').select();
+  Promise.all([
+    getClasses,
+    getInstructors
+  ])
+  .then((results) => {
+    const renderObject = {};
+    renderObject.classes = results[0];
+    renderObject.instructors = results[1];
+    res.send(renderObject);
+  });
+});
+
+router.post('/new', (req, res, next) => {
+
+});
 
 //gets ONE class
 router.get('/:id/class', function (req, res, next) {

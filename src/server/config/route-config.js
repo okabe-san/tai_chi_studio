@@ -11,12 +11,14 @@
     const instructors = require('../routes/instructors');
     const reviews = require('../routes/reviews');
 
+
     // *** register routes *** //
     app.use('/', routes);
     app.use('/classes', classes);
     app.use('/users', users);
     app.use('/instructors', instructors);
     app.use('/reviews', reviews);
+
   };
 
 })(module.exports);
