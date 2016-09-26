@@ -5,7 +5,7 @@ const knex = require('../db/knex');
 // get review page
 router.get('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  knex('instructor')
+  knex('instructors')
   .where('id', id)
   .select('*')
   .then((data) => {
@@ -21,7 +21,7 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  knex('review')
+  knex('reviews')
   .insert({
     review: req.body.review,
     rating: parseInt(req.body.rating),

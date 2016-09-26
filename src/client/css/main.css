@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
 }
 
 a {
@@ -13,7 +14,26 @@ a {
 }
 
 /*index page*/
-.landing {
-  height: 400px;
-  background-image: url('images/Banner02.jpg');
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.bannerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 800px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../images/Banner02.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bannerText {
+  color: #333;
+  padding: 5%;
+  background: rgba(255, 255, 255, 0.5);
 }
