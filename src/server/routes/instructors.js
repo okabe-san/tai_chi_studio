@@ -31,6 +31,8 @@ router.get('/', function (req, res, next) {
   });
 });
 
+res.render('instructors');
+
 // get new(add) instructor page
 router.get('/new', (req, res, next) => {
   res.render('instructors/instructor_new');

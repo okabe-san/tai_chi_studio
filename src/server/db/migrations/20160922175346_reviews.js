@@ -1,5 +1,5 @@
 exports.up = (knex, Promise) => {
-  return knex.schema.createTable('review', (table) => {
+  return knex.schema.createTable('reviews', (table) => {
     table.increments();
     table.text('review').notNullable();
     table.integer('rating').notNullable();
@@ -8,5 +8,5 @@ exports.up = (knex, Promise) => {
 };
 
 exports.down = (knex, Promise) => {
-  return knex.schema.dropTable('review');
+  return knex.schema.dropTable('reviews');
 };
