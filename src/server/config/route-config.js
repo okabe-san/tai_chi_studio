@@ -6,15 +6,19 @@
 
     // *** routes *** //
     const routes = require('../routes/index');
-    const class = require('../routes/class');
-    const user = require('../routes/user');
-    // const instructor = require('../routes/instructor');
+    const classes = require('../routes/classes');
+    const users = require('../routes/users');
+    const instructors = require('../routes/instructors');
+    const reviews = require('../routes/reviews');
 
     // *** register routes *** //
     app.use('/', routes);
     app.use('/classes', classes);
-    app.use('/user', user);
+    app.use('/user', users);
     // app.use('/instructor', instructor);
+    app.use('/users', users);
+    app.use('/instructors', instructors);
+    app.use('/reviews', reviews);
   };
 
 })(module.exports);
