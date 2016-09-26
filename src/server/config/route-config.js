@@ -8,13 +8,15 @@
     const routes = require('../routes/index');
     const classes = require('../routes/classes');
     const users = require('../routes/users');
-    const instructor = require('../routes/instructors');
+    const instructors = require('../routes/instructors');
+    const reviews = require('../routes/reviews');
 
     // *** register routes *** //
     app.use('/', routes);
     app.use('/classes', classes);
     app.use('/users', users);
-    app.use('/instructors', instructor);
+    app.use('/instructors', instructors);
+    app.use('/reviews', reviews);
   };
 
 })(module.exports);

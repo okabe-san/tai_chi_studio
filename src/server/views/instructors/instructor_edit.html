@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Edit instructor</h1>
+  <form class="form-horizontal" method="POST" action="/instructors/edit/{{instructor[0].id}}">
+    <div class="form-group">
+      <div class="col-md-12">
+        <h4>Name:</h4>
+        <input type="text" class="form-control" name="names" value="{{instructor[0].names}}">
+      </div>
+      <div class="col-md-12">
+        <h4>Biography:</h4>
+        <input type="text" class="form-control" name="biography" value="{{instructor[0].biography}}">
+      </div>
+      <div class="col-md-12">
+        <h4>Photo URL:</h4>
+        <input type="text" class="form-control" name="photo_url" value="{{instructor[0].photo_url}}">
+      </div>
+    </div>
+    <a href="/instructors" type="button" class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-default">Edit instructor</button>
+  </form>
+</div>
+
+{% endblock %}
