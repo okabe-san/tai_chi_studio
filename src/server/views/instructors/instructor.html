@@ -13,11 +13,20 @@
         <!-- {{instructor.photo_url}} -->
       {{instructor[0].biography}}
       <br>
+      <h1>This instructor is teaching:</h1>
+      {% for class_info in class_info %}
+        <a href="../classes/{{class_info.instructor_id}}/class">{{class_info.name}}</a>
+        {{class_info.day}}
+        {{class_info.start_time}} ~
+        <br>
+      {% endfor %}
+      <a href="/reviews/{{instructor[0].id}}" type="button" class="btn btn-success form-button">Review This instructor</a>
+      <br>
       <a href="/instructors" type="button" class="btn btn-success form-button">Back</a>
     </section>
     <section class="col-md-8">
       <h1>Instructor Reviews:</h1>
-      {% for instructor in instructor %}
+      {% for instructor in review %}
         {{instructor.review}}
         <br>
         {{instructor.rating | safe}}

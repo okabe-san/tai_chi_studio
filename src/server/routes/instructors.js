@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 
-// all instructors
+// get all instructors page
 router.get('/', function (req, res, next) {
   knex('instructor')
   .select('*', 'instructor.id')
@@ -22,26 +22,125 @@ router.get('/', function (req, res, next) {
       });
       const renderObject = {};
       renderObject.instructor = data;
-      console.log(renderObject);
-      res.render('instructors', renderObject);
+      res.render('instructors/instructors', renderObject);
     });
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
   });
 });
 
-// single instructor
+// get new(add) instructor page
+router.get('/new', (req, res, next) => {
+  res.render('instructors/instructor_new');
+});
+
+router.get('/edit/:id', (req, res, next) => {
+  const id = parseInt(req.params.id);
+  knex('instructor')
+  .where('id', id)
+  .select('*')
+  .then((data) => {
+    const renderObject = {};
+    renderObject.instructor = data;
+    res.render('instructors/instructor_edit', renderObject);
+  });
+});
+
+// get single instructor page
 router.get('/:id', function (req, res, next) {
   const id = parseInt(req.params.id);
   knex('instructor')
-  .join('review', 'review.instructor_id', 'instructor.id')
-  .where('instructor.id', id)
+  .where('id', id)
   .select('*')
-  .then(function(data) {
-    data.map(function(el) {
-      el.rating = '<i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>'.repeat(el.rating);
+  .then(function (instructor_info) {
+    knex('review')
+    .where('instructor_id', id)
+    .select('*')
+    .then(function (data) {
+      data.map(function(el) {
+        el.rating = '<i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>'.repeat(el.rating);
+      });
+      knex('class')
+      .where('instructor_id', id)
+      .select('*')
+      .then(function (class_info) {
+        const renderObject = {};
+        renderObject.instructor = instructor_info;
+        renderObject.class_info = class_info;
+        renderObject.review = data;
+        res.render('instructors/instructor', renderObject);
+      });
     });
-    const renderObject = {};
-    renderObject.instructor = data;
-    res.render('instructor', renderObject);
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
+// post new instructor to database
+router.post('/new', (req, res, next) => {
+  knex('instructor')
+  .insert({
+    names: req.body.names,
+    biography: req.body.biography,
+    photo_url: req.body.photo_url
+  }, '*')
+  .then((data) => {
+    res.redirect('/instructors');
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
+// update instractor info
+router.post('/edit/:id', (req, res, next) => {
+  const id = parseInt(req.params.id);
+  knex('instructor')
+  .update({
+    names: req.body.names,
+    biography: req.body.biography,
+    photo_url: req.body.photo_url
+  })
+  .where('id', id)
+  .returning('*')
+  .then((data) => {
+    res.redirect('/instructors');
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
+// delete instractor (delete instractor and review)
+router.delete('/:id', (req, res, next) => {
+  const id = parseInt(req.params.id);
+  knex('review')
+  .del()
+  .where({
+    instructor_id: id
+  })
+  .select('id')
+  .returning('*')
+  .then((deleted_review) => {
+    knex('instructor')
+    .del()
+    .where('instructor.id', id)
+    .returning('*')
+    .then(() => {
+      res.send({
+        message: 'success'
+      });
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
   });
 });
 
