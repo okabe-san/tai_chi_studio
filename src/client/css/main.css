@@ -11,3 +11,9 @@ a {
   color: red;
   font-weight: bold;
 }
+
+/*index page*/
+.landing {
+  height: 400px;
+  background-image: url('images/Banner02.jpg');
+}
