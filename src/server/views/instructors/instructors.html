@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <h1>Instructors:</h1>
+    {% for instructor in instructor %}
+      <a href="/instructors/{{instructor.id}}">{{instructor.names}}</a>
+      <br>
+      {{instructor.biography}}
+      <br>
+      {{instructor.photo_url}}
+      <br>
+      {{instructor.rating | safe}}
+      <br>
+    {% endfor %}
+
+    <h1>Admin Area:</h1>
+    <a href="/instructors/new" type="button" class="btn btn-default">Add New instructor</a>
+    <br>
+    <select id="editId" class="form-control">
+      {% for instructor in instructor %}
+      <option value="{{instructor.id}}">
+        {{instructor.names}}
+      </option>
+      {% endfor %}
+    </select>
+    <div id="test">
+    <button class="btn btn-default edit-instructor">Edit instructor</button>
+    </div>
+    <br>
+    <select id="deleteId" class="form-control">
+      {% for instructor in instructor %}
+      <option value="{{instructor.id}}">
+        {{instructor.names}}
+      </option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-sm btn-success delete-instructor">Delete</button>
+  </div>
+
+{% endblock %}

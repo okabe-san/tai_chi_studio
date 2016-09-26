@@ -81,14 +81,8 @@ router.get('/:id', function (req, res, next) {
   var member_id = req.params.id;
   console.log('the req', req.body);
   var renderObject = {};
-
-  res.render('users_profile', renderObject);
-});
-
-//gets to the page that allows a user to log in (not a new user)
-router.get('/edit/:id', function (req, res, next) {
-  var member_id = req.params.id;
-  var renderObject = {};
+  //select from users by id
+  //populate edit fields
 
   knex('users')
   .where('id', member_id)
