@@ -9,7 +9,7 @@ exports.seed = function(knex, Promise) {
   };
 
 function createUser (knex) {
-  return knex('user')
+  return knex('users')
     .insert({
       first_name: faker.name.firstName(),
       last_name: faker.name.lastName(),
