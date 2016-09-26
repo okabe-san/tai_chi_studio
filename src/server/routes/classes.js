@@ -19,7 +19,6 @@ router.get('/', (req, res, next) => {
 });
 //alias is above this line
 ///gina is below this line
-
 router.get('/new',(req, res, next) => {
   let getClasses = knex('classes').select();
   let getInstructors = knex('instructors').select();
@@ -38,7 +37,6 @@ router.get('/new',(req, res, next) => {
 router.post('/new', (req, res, next) => {
 
 });
-
 
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
@@ -135,15 +133,4 @@ router.get('/:id/class/edit', function (req, res, next) {
   });
 });
 
-//post the one class so admin can
-// knex('class')
-// .insert({
-//   name: req.body.class_name,
-//   description: req.body.description,
-//   instructor_id: req.body.instructor_id,
-//   day: req.body.day,
-//   start_time: req.body.start_time,
-//   end_time: req.body.end_time,
-//   size: req.body.size
-// })
 module.exports = router;
