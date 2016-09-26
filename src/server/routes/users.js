@@ -8,6 +8,29 @@ router.get('/signup', function (req, res, next) {
   res.render('validation/signup');
 });
 
+router.get('/verify', function (req, res, next) {
+  console.log('here is the req: ', req.body);
+
+  var renderObject = {};
+
+  knex('users')
+  .where({
+    email: req.body.email,
+    password: req.body.password
+  })
+  .select()
+  .then((results) => {
+    renderObject = results[0];
+    console.log('renderObject: ', renderObject);
+    res.json(renderObject);
+  })
+  .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.render('validation/signin');
+    });
+});
+
 //get the the page that allows a user to sign up with the studio (new user)
 router.post('/signup', function (req, res, next) {
 
@@ -54,16 +77,30 @@ router.get('/signin', function (req, res, next) {
 });
 
 //gets to the page that allows a user to log in (not a new user)
+router.get('/:id', function (req, res, next) {
+  var member_id = req.params.id;
+  console.log('the req', req.body);
+  var renderObject = {};
+
+  res.render('users_profile', renderObject);
+});
+
+//gets to the page that allows a user to log in (not a new user)
 router.get('/edit/:id', function (req, res, next) {
+  var member_id = req.params.id;
+  var renderObject = {};
 
-  //select from users by id
-  //populate edit fields
-  //
-  res.render('users_edit_profile');
+  knex('users')
+  .where('id', member_id)
+  .then((results) => {
+    renderObject = results[0];
+    console.log('renderObject: ', renderObject);
+    res.render('users_edit_profile', {renderObject});
+  });
 });
 
-router.post('/edit/:id', function (req, res, next) {
-  res.render('users_edit_profile');
-});
+router.put('/edit/:id', function (req, res, next) {
+    res.render('users_edit_profile');
+  });
 
 module.exports = router;

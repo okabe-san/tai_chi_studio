@@ -3,6 +3,36 @@
 
   console.log('users sanity check!');
 
+  $('#signInButton').on('click', (event) => {
+    event.preventDefault();
+
+    const userPayload = {
+      email: $('#sign_in_email').val(),
+      password: $('#sign_in_password').val()
+    };
+
+    $.ajax({
+      type: 'GET',
+      url: '/users/verify',
+      data: userPayload
+    })
+    .done((returnPayload) => {
+      console.log('returnPayload: ', returnPayload);
+
+      $.ajax({
+        type: 'GET',
+        url: '/users/' + returnPayload.id,
+        data: returnPayload
+      })
+      .done((userData) => {
+        console.log('here is the user page');
+      });
+    })
+    .fail((error) => {
+      console.log(error);
+    });
+  });
+
   $('#saveUserButton').on('click', (event) => {
     event.preventDefault();
 
