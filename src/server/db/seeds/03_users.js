@@ -5,7 +5,6 @@ exports.seed = function(knex, Promise) {
     let arrayOfuser = Array.from(numberOfArrays).map(() => {
       return createUser(knex);
     });
-    console.log(arrayOfuser);
     return Promise.all(arrayOfuser);
   };
 
