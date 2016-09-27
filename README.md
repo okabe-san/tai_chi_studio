@@ -15,3 +15,8 @@ Bootstrap
 PostgreSQL
 Knex
 express.js
+
+API's used:
+-Local API
+-Google Maps API
+-Fortune Cookie API
