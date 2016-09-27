@@ -20,7 +20,7 @@
           <p>End Time: {{class.end_time}}</p>
           <p>Available Spots: {{class.size}}</p>
           <p>{{class.description}}</p><br>
-          <a href="/classes/{{class.id}}/class/edit"><button type="button" class="btn btn-primary edit_class"  name="{{class.id}}">Edit Class</button></a>
+          <a href="/classes/{{class.id}}/class/edit"><button type="button" class="btn btn-primary edit_class"  name="{{class.id}}" data-id={{class.id}}>Edit Class</button></a>
           <a href="/classes/{{class.id}}/class"><button type="button" class="btn btn-danger delete_class" name="{{class.id}}" data-id={{class.id}}>Delete Class</button></a>
           {% endfor %}
       </div>

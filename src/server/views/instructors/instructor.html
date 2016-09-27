@@ -7,30 +7,33 @@
 <div class="container">
   <div class="row">
     <section class="col-md-4">
-      <h1>Instructor:</h1>
-      {{instructor[0].names}}
+      <h2>Instructor:</h2>
+      <img src="../images/{{instructor[0].photo_url}}" alt="instractor photo not available">
       <br>
-        <!-- {{instructor.photo_url}} -->
-      {{instructor[0].biography}}
+      <h3 class="name">{{instructor[0].names}}</h3>
       <br>
-      <h1>This instructor is teaching:</h1>
+      <p>{{instructor[0].biography}}</p>
+      <br>
+      <h2>This instructor is teaching:</h2>
+      <div class="wrap">
       {% for class_info in class_info %}
-        <a href="../classes/{{class_info.instructor_id}}/class">{{class_info.name}}</a>
+        <h4><a href="../classes/{{class_info.instructor_id}}/class">{{class_info.name}}</a>
         {{class_info.day}}
         {{class_info.start_time}} ~
-        <br>
+        </h4>
       {% endfor %}
-      <a href="/reviews/{{instructor[0].id}}" type="button" class="btn btn-success form-button">Review This instructor</a>
+      </div>
       <br>
-      <a href="/instructors" type="button" class="btn btn-success form-button">Back</a>
+      <a href="/reviews/{{instructor[0].id}}" type="button" class="btn btn-primary form-button">Review This instructor</a>
     </section>
     <section class="col-md-8">
-      <h1>Instructor Reviews:</h1>
+      <h2>Instructor Reviews:</h2>
       {% for instructor in review %}
-        {{instructor.review}}
-        <br>
-        {{instructor.rating | safe}}
-        <br>
+        <div class="review">
+          <p>{{instructor.review}}</p>
+          <p>{{instructor.rating | safe}}</p>
+          <hr>
+        </div>
       {% endfor %}
     </section>
   </div>
