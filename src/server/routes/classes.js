@@ -4,8 +4,13 @@ const knex = require('../db/knex');
 
 //gets ALL class
 router.get('/', (req, res, next) => {
-  let getClasses = knex('classes').select();
-  let getInstructors = knex('instructors').select();
+  function getAll(tableName) {return knex(tableName).select();}
+  function getDay(days) {
+    return knex('classes').select('*').where('classes.day', days
+  );}
+  let getClasses = getAll('classes');
+  let getInstructors = getAll('instructors');
+
   Promise.all([
     getClasses,
     getInstructors
@@ -14,7 +19,8 @@ router.get('/', (req, res, next) => {
     const renderObject = {};
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
-    res.send(renderObject);
+    res.render('classes/classes', renderObject);
+    console.log(renderObject.instructors)
   });
 });
 //alias is above this line
@@ -31,7 +37,7 @@ router.get('/new',(req, res, next) => {
     const renderObject = {};
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
-    res.send(renderObject);
+
   });
 });
 

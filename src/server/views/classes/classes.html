@@ -4,10 +4,31 @@
 
 {% block content %}
 
-  <div class="container">
-    <p class="alert">{{noclasses}}</p>
-    <h1>class Landing Page: SHOWS ALL class!!</h1>
-    <h2>{{class}}
+<div class="row">
+  <div class="col-md-2 col-md-offset-1">
+    <h1>Mon</h1>
   </div>
+  <div class="col-md-2">
+    <h1>Tues</h1>
+  </div>
+  <div class="col-md-2">
+    <h1>Wed</h1>
+  </div>
+  <div class="col-md-2">
+    <h1>Thurs</h1>
+  </div>
+  <div class="col-md-2">
+    <h1>Fri</h1>
+  </div>
+</div>
+
+
+  {% for class in classes %}
+
+  {% endfor %}
+
+
+
+
 
 {% endblock %}
