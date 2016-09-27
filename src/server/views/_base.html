@@ -17,13 +17,28 @@
     <link rel="stylesheet" href="/css/main.css">
     {% block css %}{% endblock %}
   </head>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <ul class="nav nav-pills">
-      <li role="presentation" class="active"><a href="/">Home</a></li>
-      <li role="presentation"><a href="/classes">Classes</a></li>
-      <li role="presentation"><a href="/instructors">instructors</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav class="nav">
+      <ul>
+        <li class="current-menu-item"><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/classes">Classes</a>
+          <ul>
+            <li><a href="#">Sub Menu 1</a></li>
+            <li><a href="#">Sub Menu 2</a></li>
+            <li><a href="#">Sub Menu 3</a></li>
+          </ul>
+        </li>
+        <li><a href="/instructors">instructors</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="/users/signup">Get One Week Free Lessons?</a></li>
+        <li class="current-menu-item"><a href="/users/signin">Log In</a></li>
+        <li><a href="#">Log Out</a></li>
+      </ul>
+    </nav>
+  </header>
   <body>
       {% block content %}
       {% endblock %}
@@ -35,19 +50,11 @@
     <script type="text/javascript" src="/js/review.js"></script>
     {% block scripts %}{% endblock %}
   </body>
-  <div class="collapse navbar-collapse navHeaderCollapse">
-    <div class='nav navbar-nav navbar-right'>
-        <p class="navbar-text navbar-right">Signed in as, <a href="#" class="navbar-link" style="color: white;">Mark Otto</a></p>
+  <footer>
+    <a href="https://github.com/gdebell">Gina</a> |
+    <a href="https://github.com/aliasm6">Alias</a> |
+    <a href="https://github.com/okabe-san">Akiko</a> |
+    <a href="https://github.com/philbenz">Phil</a>
+  </footer>
 
-        <button type="button" class="btn btn-default navbar-btn pull-right"><a href="/logout">Logout</a></button>
-    </div>
-  </div>
-  <!-- <nav class="navbar navbar-default navbar-fixed-bottom navbar-right">
-    <div class=""
-    <ul class="nav navbar-nav navbar-right">
-      <li class="fa fa-facebook fa-lg" aria-hidden="true"></li>
-      <li class="fa fa-twitter fa-lg" aria-hidden="true"></li>
-      <li class="fa fa-instagram fa-lg" aria-hidden="true"></li>
-    </ul>
-  </nav> -->
 </html>
