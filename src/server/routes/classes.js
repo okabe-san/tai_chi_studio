@@ -52,6 +52,7 @@ router.get('/:id/class', function (req, res, next) {
     .where('classes.id', id)
     .select('*')
     .then((data) => {
+      //console.log('DDDAAATTTTAA FROM PROMISE', data);
       const renderObject = {};
       renderObject.classes = results;
       renderObject.users = data;
@@ -100,6 +101,7 @@ router.delete('/:id/class/delete', function (req, res, next) {
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
   const id = parseInt(req.params.id);
+  console.log('YOUAREEDITINGCLASSNUMBER', id);
   const findClass = knex('classes').distinct('name').select('name').orderBy('name', 'asc');
   const findInstructor = knex('classes').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
   var findDay = knex('classes').distinct('day').select('day');
@@ -118,7 +120,7 @@ router.get('/:id/class/edit', function (req, res, next) {
   ])
   .then((results) => {
     const renderObject = {};
-    console.log(results);
+    //console.log(results);
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
     renderObject.days = results[2];
@@ -127,6 +129,41 @@ router.get('/:id/class/edit', function (req, res, next) {
     renderObject.sizes = results[5];
     renderObject.descriptions = results[6];
     res.render('classes/editclass', renderObject);
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
+router.put('/:id/class/edit', function (req, res, next) {
+  const id = parseInt(req.params.id);
+  console.log('you are editing class num: ', id);
+  const updateName = req.body.name;
+  const updateDescription = req.body.description;
+  const updateInstructor_id = req.body.instructor_id;
+  const updateDay = req.body.day;
+  const updateStart_time = req.body.start_time;
+  const updateEnd_time = req.body.end_time;
+  const updateSize = req.body.size;
+
+  knex('classes')
+  .select('*')
+  .where('classes.id', id)
+  .update({
+    name: updateName,
+    description: updateDescription,
+    instructor_id: updateInstructor_id,
+    day: updateDay,
+    start_time: updateStart_time,
+    end_time: updateEnd_time,
+    size: updateSize
+  })
+  .then((results) => {
+    console.log('UPDATE: ', results);
+    res.status(200).json({
+      status: 'Update was sucessful.'
+    });
   })
   .catch((err) => {
     console.log(err);
