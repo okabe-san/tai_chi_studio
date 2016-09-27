@@ -4,10 +4,12 @@
 
 {% block content %}
 
+<div class="container edit-container">
+  <h1>Edit Class Information</h1>
+  <br><br>
+  <form class="form-horizontal edit-form" method="POST" action="/classes/">
+
   <div class="container">
-    <h1>Edit Class Information</h1>
-    <br><br>
-    <form class="form-horizontal">
 
     <select class="form-control">
       <option>Select Class Name</option>
@@ -62,9 +64,11 @@
       {% for description in descriptions %}
       <option name="description">{{description.description}}</option>
       {% endfor %}
-    </select>
-    <br>
+    </select><br><br>
 
+    <a href="/classes/"><button type="submit" value="submit" class="btn btn-success edit_class btn-lg">Save Changes</button></a>
+
+    </div>
     </form>
   </div>
 {% endblock %}
