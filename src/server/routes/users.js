@@ -32,6 +32,29 @@ router.get('/verify', function (req, res, next) {
     });
 });
 
+router.get('/viewuser/:id', function (req, res, next) {
+  console.log('here is the req: ', req.body);
+
+  var renderObject = {};
+
+  knex('users')
+  .where({
+    email: req.body.email,
+    password: req.body.password
+  })
+  .select()
+  .then((results) => {
+    renderObject = results[0];
+    console.log('renderObject: ', renderObject);
+    res.json(renderObject);
+  })
+  .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.render('validation/signin');
+    });
+});
+
 //get the the page that allows a user to sign up with the studio (new user)
 router.post('/signup', function (req, res, next) {
   // Hash the password with the salt
@@ -98,7 +121,7 @@ router.post('/signin', function (req, res, next) {
   });
 });
 
-//gets to the page that allows a user to log in (not a new user)
+//view a users profile
 router.get('/:id', function (req, res, next) {
   var member_id = req.params.id;
   console.log('the req', req.body);
