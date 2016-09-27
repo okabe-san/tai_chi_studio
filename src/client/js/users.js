@@ -51,6 +51,11 @@
     }
   });
 
+  console.log('email: ', $('#email').text());
+  sessionStorage.setItem('email', $('#email').text());
+  sessionStorage.setItem('first_name', $('#firstName').text());
+  sessionStorage.setItem('id', $('#user_id').text());
+
   function isBlank(input) {
     //validate sign up
     console.log('in isBlank');
