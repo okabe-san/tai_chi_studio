@@ -4,10 +4,10 @@ const knex = require('../db/knex');
 
 // get all instructors page
 router.get('/', function (req, res, next) {
-  knex('instructor')
-  .select('*', 'instructor.id')
+  knex('instructors')
+  .select('*', 'instructors.id')
   .then(function(data) {
-    knex('review')
+    knex('reviews')
     .avg('rating')
     .groupBy('instructor_id')
     .select('instructor_id')
@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
         rating.forEach(function(el_rating) {
           if (el_rating.instructor_id === el.id) {
             el_rating.avg = parseInt(el_rating.avg);
-            el.rating = '<i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>'.repeat(el_rating.avg);
+            el.rating = '<i class="fa fa-star" aria-hidden="true"></i>'.repeat(el_rating.avg);
           }
         });
       });
@@ -38,7 +38,7 @@ router.get('/new', (req, res, next) => {
 
 router.get('/edit/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  knex('instructor')
+  knex('instructors')
   .where('id', id)
   .select('*')
   .then((data) => {
@@ -51,18 +51,18 @@ router.get('/edit/:id', (req, res, next) => {
 // get single instructor page
 router.get('/:id', function (req, res, next) {
   const id = parseInt(req.params.id);
-  knex('instructor')
+  knex('instructors')
   .where('id', id)
   .select('*')
   .then(function (instructor_info) {
-    knex('review')
+    knex('reviews')
     .where('instructor_id', id)
     .select('*')
     .then(function (data) {
       data.map(function(el) {
-        el.rating = '<i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>'.repeat(el.rating);
+        el.rating = '<i class="fa fa-star" aria-hidden="true"></i>'.repeat(el.rating);
       });
-      knex('class')
+      knex('classes')
       .where('instructor_id', id)
       .select('*')
       .then(function (class_info) {
@@ -82,7 +82,7 @@ router.get('/:id', function (req, res, next) {
 
 // post new instructor to database
 router.post('/new', (req, res, next) => {
-  knex('instructor')
+  knex('instructors')
   .insert({
     names: req.body.names,
     biography: req.body.biography,
@@ -100,7 +100,7 @@ router.post('/new', (req, res, next) => {
 // update instractor info
 router.post('/edit/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  knex('instructor')
+  knex('instructors')
   .update({
     names: req.body.names,
     biography: req.body.biography,
@@ -120,7 +120,8 @@ router.post('/edit/:id', (req, res, next) => {
 // delete instractor (delete instractor and review)
 router.delete('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  knex('review')
+
+  knex('reviews')
   .del()
   .where({
     instructor_id: id
@@ -128,9 +129,9 @@ router.delete('/:id', (req, res, next) => {
   .select('id')
   .returning('*')
   .then((deleted_review) => {
-    knex('instructor')
+    knex('instructors')
     .del()
-    .where('instructor.id', id)
+    .where('instructors.id', id)
     .returning('*')
     .then(() => {
       res.send({
