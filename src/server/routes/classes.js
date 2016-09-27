@@ -20,10 +20,6 @@ router.get('/', (req, res, next) => {
 //alias is above this line
 ///gina is below this line
 
-router.get('/api', (req, res, next) => {
-  res.render('classes/api');
-});
-
 router.get('/new',(req, res, next) => {
   let getClasses = knex('classes').select();
   let getInstructors = knex('instructors').select();
