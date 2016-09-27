@@ -52,6 +52,7 @@ router.get('/:id/class', function (req, res, next) {
     .where('classes.id', id)
     .select('*')
     .then((data) => {
+      //console.log('DDDAAATTTTAA FROM PROMISE', data);
       const renderObject = {};
       renderObject.classes = results;
       renderObject.users = data;
@@ -100,6 +101,7 @@ router.delete('/:id/class/delete', function (req, res, next) {
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
   const id = parseInt(req.params.id);
+  //console.log('YOUAREEDITINGCLASSNUMBER', id);
   const findClass = knex('classes').distinct('name').select('name').orderBy('name', 'asc');
   const findInstructor = knex('classes').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
   var findDay = knex('classes').distinct('day').select('day');
@@ -118,7 +120,9 @@ router.get('/:id/class/edit', function (req, res, next) {
   ])
   .then((results) => {
     const renderObject = {};
-    console.log(results);
+    //console.log(results);
+    renderObject.id = id;
+    //console.log(renderObject.id);
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
     renderObject.days = results[2];
@@ -127,6 +131,32 @@ router.get('/:id/class/edit', function (req, res, next) {
     renderObject.sizes = results[5];
     renderObject.descriptions = results[6];
     res.render('classes/editclass', renderObject);
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
+router.post('/:id/class/edit', function (req, res, next) {
+  const id = parseInt(req.params.id);
+  console.log('REQUEST BODY', req.body);
+  console.log(req.body.name);
+  knex('classes')
+  .where('classes.id', id)
+  .update({
+    name: req.body.name,
+    description: req.body.description,
+    instructor_id: req.body.instructor_id,
+    day: req.body.day,
+    start_time: req.body.start_time,
+    end_time: req.body.end_time,
+    size: req.body.size
+  })
+  .returning('*')
+  .then((results) => {
+    console.log('UPDATE: ', results);
+    res.redirect('/classes');
   })
   .catch((err) => {
     console.log(err);
