@@ -103,6 +103,11 @@ header {
   background: rgba(255, 255, 255, 0.5);
 }
 
+.bannerText p {
+  font-family: 'Sarina', cursive;
+  font-size: 36px;
+}
+
 /* footer */
 footer {
   color: #999;

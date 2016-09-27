@@ -75,28 +75,28 @@ router.post('/signup', function (req, res, next) {
 router.get('/signin', function (req, res, next) {
   res.render('validation/signin');
 });
-//
-// router.post('/signin', function (req, res, next) {
-//   knex('users')
-//   .where({
-//     email: req.body.email
-//   })
-//   .select('password')
-//   .then((results) => {
-//     if(bcrypt.compareSync(req.body.password, results[0].password)) {
-//       res.redirect('/classes');
-//     } else {
-//       res.status(500).send({
-//         status: 'error',
-//         message: 'error'
-//       });
-//     }
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//     res.status(500);
-//   });
-// });
+
+router.post('/signin', function (req, res, next) {
+  knex('users')
+  .where({
+    email: req.body.email
+  })
+  .select('password')
+  .then((results) => {
+    if (bcrypt.compareSync(req.body.password, results[0].password)) {
+      res.redirect('/classes');
+    } else {
+      res.status(500).send({
+        status: 'error',
+        message: 'error'
+      });
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500);
+  });
+});
 
 //gets to the page that allows a user to log in (not a new user)
 router.get('/:id', function (req, res, next) {
