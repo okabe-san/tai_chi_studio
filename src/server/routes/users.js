@@ -113,9 +113,15 @@ router.post('/signin', function (req, res, next) {
         id: results[0].id
       };
 
+      var renderObject = {
+        email: results[0].email,
+        is_admin: results[0].first_name,
+        id: results[0].id
+      };
+
       var url = '/users/' + results[0].id;
       //res.json('log in successful');
-      res.redirect(url);
+      res.status(200).json(renderObject);
     } else {
       res.status(500).send({
         status: 'error',
@@ -153,6 +159,12 @@ router.get('/edit/user_edit_profile', function (req, res, next) {
     console.log('here in user edit profile');
 
     res.render('user_edit_profile');
+  });
+
+router.get('/user/logout', (req, res, next) => {
+    console.log('in logout');
+    req.logout();
+    res.status(200).json({message:'success'});
   });
 
 module.exports = router;
