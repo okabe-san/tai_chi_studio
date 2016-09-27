@@ -106,7 +106,7 @@ router.post('/signin', function (req, res, next) {
   })
   .select('password')
   .then((results) => {
-    if(bcrypt.compareSync(req.body.password, results[0].password)) {
+    if (bcrypt.compareSync(req.body.password, results[0].password)) {
       res.redirect('/classes');
     } else {
       res.status(500).send({
