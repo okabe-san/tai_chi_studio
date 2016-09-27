@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
         rating.forEach(function(el_rating) {
           if (el_rating.instructor_id === el.id) {
             el_rating.avg = parseInt(el_rating.avg);
-            el.rating = '<i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>'.repeat(el_rating.avg);
+            el.rating = '<i class="fa fa-star" aria-hidden="true"></i>'.repeat(el_rating.avg);
           }
         });
       });
@@ -60,7 +60,7 @@ router.get('/:id', function (req, res, next) {
     .select('*')
     .then(function (data) {
       data.map(function(el) {
-        el.rating = '<i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>'.repeat(el.rating);
+        el.rating = '<i class="fa fa-star" aria-hidden="true"></i>'.repeat(el.rating);
       });
       knex('classes')
       .where('instructor_id', id)

@@ -17,13 +17,37 @@
     <link rel="stylesheet" href="/css/main.css">
     {% block css %}{% endblock %}
   </head>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <ul class="nav nav-pills">
+      <li role="presentation" class="active"><a href="/">Home</a></li>
+      <li role="presentation"><a href="/classes">Classes</a></li>
+      <li role="presentation"><a href="/instructors">instructors</a></li>
+    </ul>
+  </nav>
   <body>
       {% block content %}
       {% endblock %}
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/users.js"></script>
+    <script type="text/javascript" src="/js/edit_user.js"></script>
     <script type="text/javascript" src="/js/review.js"></script>
     {% block scripts %}{% endblock %}
   </body>
+  <div class="collapse navbar-collapse navHeaderCollapse">
+    <div class='nav navbar-nav navbar-right'>
+        <p class="navbar-text navbar-right">Signed in as, <a href="#" class="navbar-link" style="color: white;">Mark Otto</a></p>
+
+        <button type="button" class="btn btn-default navbar-btn pull-right"><a href="/logout">Logout</a></button>
+    </div>
+  </div>
+  <!-- <nav class="navbar navbar-default navbar-fixed-bottom navbar-right">
+    <div class=""
+    <ul class="nav navbar-nav navbar-right">
+      <li class="fa fa-facebook fa-lg" aria-hidden="true"></li>
+      <li class="fa fa-twitter fa-lg" aria-hidden="true"></li>
+      <li class="fa fa-instagram fa-lg" aria-hidden="true"></li>
+    </ul>
+  </nav> -->
 </html>

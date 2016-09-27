@@ -1,5 +1,4 @@
 $(document).on('click', '.delete_class', function() {
-
   const answer = confirm('Are you sure? This can\'t be undone');
 
   if (answer) {

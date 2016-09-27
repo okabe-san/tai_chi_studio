@@ -13,7 +13,15 @@ a {
   font-weight: bold;
 }
 
-/*index page*/
+/* nav bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding-left: 4rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* index page */
 .container {
   margin: 0;
   padding: 0;
@@ -37,3 +45,5 @@ a {
   padding: 5%;
   background: rgba(255, 255, 255, 0.5);
 }
+
+/* footer */
