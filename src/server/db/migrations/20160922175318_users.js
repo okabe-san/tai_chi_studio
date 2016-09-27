@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
     table.boolean('liability').notNullable().defaultTo(true);
     table.string('comments');
     table.string('password').notNullable();
+    table.boolean('is_admin');
   });
 };
 

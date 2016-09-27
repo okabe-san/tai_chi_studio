@@ -41,3 +41,40 @@ $(document).on('click', '.edit-instructor', function() {
   const id = parseInt(tempId.value);
   window.location.href = '/instructors/edit/' + id + '';
 });
+
+$('#edit_class_func').on('click', function(e) {
+  e.preventDefault();
+  console.log('I am in my edit class function!!!');
+  const updatedClassName = $('#class_name option:selected').text();
+  const updatedInstructor = $('#instructor option:selected').text();
+  const updatedDay = $('#day option:selected').text();
+  const updatedStart_time = $('#start_time option:selected').text();
+  const updatedEnd_time = $('#end_time option:selected').text();
+  const updatedSize = $('#size option:selected').text();
+  const updatedDescription = $('#description option:selected').text();
+  const id = $('#id').attr('value');
+  console.log(id);
+  console.log(`classes/${id}/class/edit`);
+
+  const update = {
+    name: updatedClassName,
+    description: updatedDescription,
+    instructor_id: updatedInstructor,
+    day: updatedDay,
+    start_time: updatedStart_time,
+    end_time: updatedEnd_time,
+    size: updatedSize
+  };
+
+  $.ajax({
+    type: 'POST',
+    url: `/classes/${id}/class/edit`,
+    data: update
+  })
+  .done((data) => {
+    window.location.href = `/classes/${id}/class`;
+  })
+  .fail((err) => {
+    console.log(err);
+  });
+});
