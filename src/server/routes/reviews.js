@@ -23,6 +23,7 @@ router.post('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
   knex('reviews')
   .insert({
+    // id: 10,
     review: req.body.review,
     rating: parseInt(req.body.rating),
     instructor_id: id
