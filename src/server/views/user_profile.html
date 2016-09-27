@@ -1,82 +1,76 @@
-{% extends "../_base.html" %}
+{% extends "_base.html" %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
-<div class="container">
+<div>
 <form class="form-horizontal">
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Email</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+        <p id="email" placeholder="Email">{{ renderObject.email }}
       </div>
     </div>
     <div class="form-group">
       <label for="first_name" class="col-lg-2 control-label">First Name</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="firstName" name="firstName">
+        <p id="firstName">{{ renderObject.first_name }}
       </div>
     </div>
     <div class="form-group">
       <label for="last_name" class="col-lg-2 control-label">Last Name</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="lastName" name="lastName">
+        <p id="lastName">{{ renderObject.last_name }}
       </div>
     </div>
     <div class="form-group">
       <label for="address_line_1" class="col-lg-2 control-label">Street Address 1</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="line_1" name="address_line_1">
+        <p id="line_1">{{ renderObject.address_line_1 }}
       </div>
     </div>
     <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">Street Address 2</label>
+      <label for="address_line_2" class="col-lg-2 control-label">Street Address 2</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="line_2" name="address_line_2">
+        <p id="line 2">{{ renderObject.address_line_2 }}
       </div>
     </div>
     <div class="form-group">
       <label for="address_line_1" class="col-lg-2 control-label">City</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="city" name="city">
+        <p id="city">{{ renderObject.city }}
       </div>
     </div>
     <div class="form-group">
       <label for="address_line_1" class="col-lg-2 control-label">State</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="state" name="state">
+        <p id="state">{{ renderObject.state}}
       </div>
     </div>
     <div class="form-group">
       <label for="address_line_1" class="col-lg-2 control-label">Zip</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="zip" name="zip">
+        <p id="zip">{{ renderObject.zip }}
       </div>
     </div>
     <div class="form-group">
       <label for="comments" class="col-lg-2 control-label">What should we know about you?</label>
       <div class="col-lg-10">
-        <input type="textarea" class="form-control" id="comments" name="comments">
+        <p id="comments">{{ renderObject.comments}}
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+      <label for="Password" class="col-lg-2 control-label">Password</label>
       <div class="col-lg-10">
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+        <p id="Password" placeholder="Password">{{ renderObject.password}}
       </div>
     </div>
-    <div class="form-group">
-      <div class="checkbox">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <input type="checkbox" name="tc_checkbox" id="tc_checkbox"> Accept Terms and Conditions
-        </div>
-      </div>
+    <input id="#user_id">{{ renderObject.id }}
     <div class="form-group">
       <input type="button"  id="saveUserButton" method="post" activity="/users/edit_user" value="Save">
       <input type="button" value="Cancel" method="get" activity="/">
-      <div class="response_message">
-      </div>
     </div>
   </form>
 </div>
+
 {% endblock %}

@@ -1,11 +1,27 @@
-{% extends "_base.html" %}
+{% extends "../_base.html" %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
 
-  <div class="container">
-    <h1>Allows a user to sign in with the studio</h1>
-  </div>
+<div class="container">
+<form class="form-horizontal" method="POST" action="/users/signin">
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="sign_in_email" name="email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="sign_in_password" name="password">
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit"  id="signInButton" class="btn btn-default">Submit</button>
+    </div>
+  </form>
+</div>
 
 {% endblock %}

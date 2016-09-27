@@ -20,7 +20,7 @@
           <p>End Time: {{class.end_time}}</p>
           <p>Available Spots: {{class.size}}</p>
           <p>{{class.description}}</p><br>
-          <a href="/classes/{{class.id}}/class/edit"><button type="button" class="btn btn-primary edit_class"  name="{{class.id}}">Edit Class</button></a>
+          <a href="/classes/{{class.id}}/class/edit"><button type="button" class="btn btn-primary edit_class"  name="{{class.id}}" data-id={{class.id}}>Edit Class</button></a>
           <a href="/classes/{{class.id}}/class"><button type="button" class="btn btn-danger delete_class" name="{{class.id}}" data-id={{class.id}}>Delete Class</button></a>
           {% endfor %}
       </div>
@@ -43,22 +43,20 @@
             <th>Zip</th>
             <th>Comments</th>
             <th></th>
-            <th></th>
           </tr>
           {% for user in users %}
           <tr>
-            <td>user.liability</td>
-            <td>user.first_name</td>
-            <td>user.last_name</td>
-            <td>user.email</td>
-            <td>user.address_line_1</td>
-            <td>user.address_line_2</td>
-            <td>user.city</td>
-            <td>user.state</td>
-            <td>user.zip</td>
-            <td>user.comments</td>
-            <td><a href=""><button type="button" class="btn btn-primary edit_user"  name="{{user.id}}">Edit User</button></a></td>
-            <td><a href=""><button type="button" class="btn btn-danger delete_user" name="{{user.id}}" data-id={{user.id}}>Delete User</button></a></td>
+            <td>{{user.liability}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.address_line_1}}</td>
+            <td>{{user.address_line_2}}</td>
+            <td>{{user.city}}</td>
+            <td>{{user.state}}</td>
+            <td>{{user.zip}}</td>
+            <td>{{user.comments}}</td>
+            <td><a href=""><button type="button" class="btn btn-danger delete_user btn-sm" name="{{user.id}}" data-id={{user.id}}>Remove Student from Class</button></a></td>
           </tr>
           {% endfor %}
         </table>

@@ -45,23 +45,25 @@ router.post('/new', (req, res, next) => {
 
 });
 
-//gets ONE class
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
-  knex('class')
-  .join('instructor', 'instructor.id', 'instructor_id')
-  .select('*', 'class.id')
-  .where('class.id', id)
+  knex('classes')
+  .join('instructors', 'instructors.id', 'instructor_id')
+  .where('classes.id', id)
+  .select('*', 'classes.id')
   .then((results) => {
-    const renderObject = {};
-    if (results.length === 0) {
-      console.log(results);
-      renderObject.noclasses = 'There was no class found.';
-      res.render('classes/classes', renderObject);
-    } else {
+    knex('users')
+    .join('classes_users', 'classes_users.user_id', 'users.id')
+    .join('classes', 'classes.id', 'classes_users.class_id')
+    .where('classes.id', id)
+    .select('*')
+    .then((data) => {
+      //console.log('DDDAAATTTTAA FROM PROMISE', data);
+      const renderObject = {};
       renderObject.classes = results;
+      renderObject.users = data;
       res.render('classes/class', renderObject);
-    }
+    });
   })
   .catch((err) => {
     console.log(err);
@@ -72,18 +74,18 @@ router.get('/:id/class', function (req, res, next) {
 //gets ONE class to delete using button
 router.delete('/:id/class/delete', function (req, res, next) {
   const id = parseInt(req.params.id);
-  knex('class')
+  knex('classes')
   .del()
   .where('id', id)
   .returning('*')
   .then((result) => {
     console.log('item you deleted', result);
     const id = result[0].instructor_id;
-    knex('class')
+    knex('classes')
     .where('id', id)
     .then((result) => {
       if (result.length === 0) {
-        return knex('instructor')
+        return knex('instructors')
         .del()
         .where('id', id)
         .returning('*');
@@ -105,13 +107,14 @@ router.delete('/:id/class/delete', function (req, res, next) {
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
   const id = parseInt(req.params.id);
-  const findClass = knex('class').distinct('name').select('name').orderBy('name', 'asc');
-  const findInstructor = knex('class').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
-  var findDay = knex('class').distinct('day').select('day');
-  var findStartTime = knex('class').distinct('start_time').select('start_time').orderBy('start_time', 'asc');
-  var findEndTime = knex('class').distinct('end_time').select('end_time').orderBy('end_time', 'asc');
-  var findSize = knex('class').distinct('size').select('size');
-  var findDescription = knex('class').distinct('description').select('description').orderBy('description', 'asc');
+  console.log('YOUAREEDITINGCLASSNUMBER', id);
+  const findClass = knex('classes').distinct('name').select('name').orderBy('name', 'asc');
+  const findInstructor = knex('classes').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
+  var findDay = knex('classes').distinct('day').select('day');
+  var findStartTime = knex('classes').distinct('start_time').select('start_time').orderBy('start_time', 'asc');
+  var findEndTime = knex('classes').distinct('end_time').select('end_time').orderBy('end_time', 'asc');
+  var findSize = knex('classes').distinct('size').select('size');
+  var findDescription = knex('classes').distinct('description').select('description').orderBy('description', 'asc');
   Promise.all([
     findClass,
     findInstructor,
@@ -123,7 +126,7 @@ router.get('/:id/class/edit', function (req, res, next) {
   ])
   .then((results) => {
     const renderObject = {};
-    console.log(results);
+    //console.log(results);
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
     renderObject.days = results[2];
@@ -139,15 +142,39 @@ router.get('/:id/class/edit', function (req, res, next) {
   });
 });
 
-//post the one class so admin can
-// knex('class')
-// .insert({
-//   name: req.body.class_name,
-//   description: req.body.description,
-//   instructor_id: req.body.instructor_id,
-//   day: req.body.day,
-//   start_time: req.body.start_time,
-//   end_time: req.body.end_time,
-//   size: req.body.size
-// })
+router.put('/:id/class/edit', function (req, res, next) {
+  const id = parseInt(req.params.id);
+  console.log('you are editing class num: ', id);
+  const updateName = req.body.name;
+  const updateDescription = req.body.description;
+  const updateInstructor_id = req.body.instructor_id;
+  const updateDay = req.body.day;
+  const updateStart_time = req.body.start_time;
+  const updateEnd_time = req.body.end_time;
+  const updateSize = req.body.size;
+
+  knex('classes')
+  .select('*')
+  .where('classes.id', id)
+  .update({
+    name: updateName,
+    description: updateDescription,
+    instructor_id: updateInstructor_id,
+    day: updateDay,
+    start_time: updateStart_time,
+    end_time: updateEnd_time,
+    size: updateSize
+  })
+  .then((results) => {
+    console.log('UPDATE: ', results);
+    res.status(200).json({
+      status: 'Update was sucessful.'
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    return next(err);
+  });
+});
+
 module.exports = router;
