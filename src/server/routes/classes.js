@@ -12,8 +12,12 @@ const hao = 'Hao style tai chi is exceedingly rare in China and almost non-exist
 
 //gets ALL class
 router.get('/', (req, res, next) => {
-  let getClasses = knex('classes').select();
-  let getInstructors = knex('instructors').select();
+  function getAll(tableName) {return knex(tableName).select();}
+  function getDay(days) {
+    return knex('classes').select('*').where('classes.day', days
+  );}
+  let getClasses = getAll('classes');
+  let getInstructors = getAll('instructors');
   Promise.all([
     getClasses,
     getInstructors
@@ -22,49 +26,88 @@ router.get('/', (req, res, next) => {
     const renderObject = {};
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
-    res.send(renderObject);
+    res.render('classes/classes', renderObject);
   });
 });
 //alias is above this line
 ///gina is below this line
+
+//get class info for new class forms
+
+//get class info for new class forms
 router.get('/new',(req, res, next) => {
+  function getUnique(tableName, column) {
+    return knex(tableName).distinct(column).select(column).orderBy(column, 'asc');
+  }
   let getClasses = knex('classes').select();
   let getInstructors = knex('instructors').select();
+  let getClassNames = getUnique('classes', 'name');
+  let getClassDays = getUnique('classes', 'day');
+
   Promise.all([
     getClasses,
-    getInstructors
+    getInstructors,
+    getClassNames,
+    getClassDays
   ])
   .then((results) => {
     const renderObject = {};
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
-    res.send(renderObject);
+    renderObject.classNames = results[2];
+    renderObject.classDays = results[3];
+    res.render('classes/newclass', renderObject);
+    console.log(results[3]);
   });
 });
 
-router.post('/new', (req, res, next) => {
-
+router.post('/', (req, res, next) => {
+  console.log('post ', req.body);
+  const className = req.body.name;
+  const description = req.body.description;
+  const instructor_id = req.body.instructor_id;
+  const start_time = req.body.start_time;
+  const end_time = req.body.end_time;
+  const size = req.body.size;
+  const day = req.body.day;
+  knex('classes')
+  .insert(
+    {
+      name: className,
+      description: description,
+      instructor_id: instructor_id,
+      day: day,
+      start_time: start_time,
+      end_time: end_time,
+      size: size
+    })
+    .then((data) => {
+      res.send({
+        redirect: '/'
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
+//gets ONE class
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
   knex('classes')
   .join('instructors', 'instructors.id', 'instructor_id')
-  .where('classes.id', id)
   .select('*', 'classes.id')
+  .where('classes.id', id)
   .then((results) => {
-    knex('users')
-    .join('classes_users', 'classes_users.user_id', 'users.id')
-    .join('classes', 'classes.id', 'classes_users.class_id')
-    .where('classes.id', id)
-    .select('*')
-    .then((data) => {
-      //console.log('DDDAAATTTTAA FROM PROMISE', data);
-      const renderObject = {};
+    const renderObject = {};
+    if (results.length === 0) {
+      console.log(results);
+      renderObject.noclasses = 'There was no class found.';
+      res.render('classes/classes', renderObject);
+    } else {
       renderObject.classes = results;
-      renderObject.users = data;
       res.render('classes/class', renderObject);
-    });
+    }
   })
   .catch((err) => {
     console.log(err);
@@ -108,7 +151,6 @@ router.delete('/:id/class/delete', function (req, res, next) {
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
   const id = parseInt(req.params.id);
-  //console.log('YOUAREEDITINGCLASSNUMBER', id);
   const findClass = knex('classes').distinct('name').select('name').orderBy('name', 'asc');
   const findInstructor = knex('classes').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
   var findDay = knex('classes').distinct('day').select('day');
