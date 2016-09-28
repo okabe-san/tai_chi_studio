@@ -34,9 +34,7 @@ router.get('/', (req, res, next) => {
 
 //get class info for new class forms
 
-
 //get class info for new class forms
-
 router.get('/new',(req, res, next) => {
   function getUnique(tableName, column) {
     return knex(tableName).distinct(column).select(column).orderBy(column, 'asc');
@@ -127,7 +125,6 @@ router.delete('/:id/class/delete', function (req, res, next) {
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
   const id = parseInt(req.params.id);
-<<<<<<< HEAD
   const findClass = knex('classes').distinct('name').select('name').orderBy('name', 'asc');
   const findInstructor = knex('classes').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
   var findDay = knex('classes').distinct('day').select('day');
@@ -175,7 +172,6 @@ router.get('/:id/class/edit', function (req, res, next) {
 //   end_time: req.body.end_time,
 //   size: req.body.size
 // })
->>>>>>> fd1e23b2e727b46ceafbd7a14d91be76e5fae3c2
 router.post('/:id/class/edit', (req, res, next) => {
     if (req.body.name === 'Chen style') {
       req.body.description = chen;
