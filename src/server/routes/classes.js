@@ -95,7 +95,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
   knex('classes')
-  .join('instructors', 'instructor.id', 'instructor_id')
+  .join('instructors', 'instructors.id', 'instructor_id')
   .select('*', 'classes.id')
   .where('classes.id', id)
   .then((results) => {
@@ -118,18 +118,18 @@ router.get('/:id/class', function (req, res, next) {
 //gets ONE class to delete using button
 router.delete('/:id/class/delete', function (req, res, next) {
   const id = parseInt(req.params.id);
-  knex('class')
+  knex('classes')
   .del()
   .where('id', id)
   .returning('*')
   .then((result) => {
     console.log('item you deleted', result);
     const id = result[0].instructor_id;
-    knex('class')
+    knex('classes')
     .where('id', id)
     .then((result) => {
       if (result.length === 0) {
-        return knex('instructor')
+        return knex('instructors')
         .del()
         .where('id', id)
         .returning('*');
@@ -187,17 +187,6 @@ router.get('/:id/class/edit', function (req, res, next) {
   });
 });
 
-//post the one class so admin can
-// knex('class')
-// .insert({
-//   name: req.body.class_name,
-//   description: req.body.description,
-//   instructor_id: req.body.instructor_id,
-//   day: req.body.day,
-//   start_time: req.body.start_time,
-//   end_time: req.body.end_time,
-//   size: req.body.size
-// })
 router.post('/:id/class/edit', (req, res, next) => {
     if (req.body.name === 'Chen style') {
       req.body.description = chen;
