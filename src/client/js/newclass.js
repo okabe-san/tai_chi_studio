@@ -39,7 +39,7 @@ $(document).on('ready', () => {
         size: classSize
       },
       success: (result) => {
-        window.location = '/classes'
+        window.location = '/classes';
       },
       error: (error) => {
         console.log(error);
