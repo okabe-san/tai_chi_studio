@@ -34,6 +34,9 @@ router.get('/', (req, res, next) => {
 
 //get class info for new class forms
 
+
+//get class info for new class forms
+
 router.get('/new',(req, res, next) => {
   function getUnique(tableName, column) {
     return knex(tableName).distinct(column).select(column).orderBy(column, 'asc');
@@ -124,13 +127,14 @@ router.delete('/:id/class/delete', function (req, res, next) {
 //gets ONE class so the admin can edit the class information
 router.get('/:id/class/edit', function (req, res, next) {
   const id = parseInt(req.params.id);
-  const findClass = knex('class').distinct('name').select('name').orderBy('name', 'asc');
-  const findInstructor = knex('class').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
-  var findDay = knex('class').distinct('day').select('day');
-  var findStartTime = knex('class').distinct('start_time').select('start_time').orderBy('start_time', 'asc');
-  var findEndTime = knex('class').distinct('end_time').select('end_time').orderBy('end_time', 'asc');
-  var findSize = knex('class').distinct('size').select('size');
-  var findDescription = knex('class').distinct('description').select('description').orderBy('description', 'asc');
+<<<<<<< HEAD
+  const findClass = knex('classes').distinct('name').select('name').orderBy('name', 'asc');
+  const findInstructor = knex('classes').distinct('instructor_id').select('instructor_id').orderBy('instructor_id', 'asc');
+  var findDay = knex('classes').distinct('day').select('day');
+  var findStartTime = knex('classes').distinct('start_time').select('start_time').orderBy('start_time', 'asc');
+  var findEndTime = knex('classes').distinct('end_time').select('end_time').orderBy('end_time', 'asc');
+  var findSize = knex('classes').distinct('size').select('size');
+  var findDescription = knex('classes').distinct('description').select('description').orderBy('description', 'asc');
   Promise.all([
     findClass,
     findInstructor,
@@ -142,7 +146,6 @@ router.get('/:id/class/edit', function (req, res, next) {
   ])
   .then((results) => {
     const renderObject = {};
-    console.log(results);
     //console.log(results);
     renderObject.id = id;
     //console.log(renderObject.id);
@@ -172,6 +175,7 @@ router.get('/:id/class/edit', function (req, res, next) {
 //   end_time: req.body.end_time,
 //   size: req.body.size
 // })
+>>>>>>> fd1e23b2e727b46ceafbd7a14d91be76e5fae3c2
 router.post('/:id/class/edit', (req, res, next) => {
     if (req.body.name === 'Chen style') {
       req.body.description = chen;
