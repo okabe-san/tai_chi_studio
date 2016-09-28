@@ -1,7 +1,7 @@
 
 (function () {
 
-    console.log('users sanity check!');
+    console.log('users sign up sanity check!');
 
     $('#saveUserButton').on('click', (event) => {
       event.preventDefault();
@@ -44,10 +44,11 @@
           data: userPayload
         })
         .done((data) => {
+          console.log('here is the return data: ', data);
           sessionStorage.setItem('email', $('#email').text());
           sessionStorage.setItem('first_name', $('#firstName').text());
           sessionStorage.setItem('id', $('#user_id').text());
-          window.location.href = '/users/' + $('#user_id').text();
+          window.location.href = '/';
         });
       }
     });
