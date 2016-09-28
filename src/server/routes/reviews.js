@@ -30,7 +30,7 @@ router.post('/:id', (req, res, next) => {
   }, '*')
   .then((data) => {
     res.send({
-      redirect: '/'
+      redirect: '/instructors'
     });
   })
   .catch((err) => {
