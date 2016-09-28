@@ -1,3 +1,3 @@
 const environment = process.env.NODE_ENV;
-const config = require('../../../knexfile.js')[environment];
+const config = process.env.DATABASE_URL || 'postgres://localhost/library' require('../../../knexfile.js')[environment];
 module.exports = require('knex')(config);
