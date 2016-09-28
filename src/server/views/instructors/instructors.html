@@ -7,7 +7,7 @@
   <div class="container">
     <h2>Instructors:</h2>
     {% for instructor in instructor %}
-      <h3 class="name"><a href="/instructors/{{instructor.id}}">{{instructor.names}}</a></h3>
+      <h3><a href="/instructors/{{instructor.id}}">{{instructor.names}}</a></h3>
       <p>{{instructor.biography}}</p>
       <p>{{instructor.rating | safe}}</p>
       <hr>
