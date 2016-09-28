@@ -46,14 +46,6 @@
     </select>
     <br>
 
-    <select class="form-control" id="end_time">
-      <option>Select End Time</option>
-      {% for end in ends %}
-      <option name="end_time" value="{{end.end_time}}">{{end.end_time}}</option>
-      {% endfor %}
-    </select>
-    <br>
-
     <select class="form-control" id="size">
       <option>Select Class Size</option>
       {% for size in sizes %}
@@ -61,13 +53,6 @@
       {% endfor %}
     </select>
     <br>
-
-    <select class="form-control" id="description">
-      <option>Select Class Description</option>
-      {% for description in descriptions %}
-      <option name="description" value="{{description.description}}">{{description.description}}</option>
-      {% endfor %}
-    </select><br><br>
 
     <button type="submit" value="submit" class="btn btn-success btn-lg" id="edit_class_func">Save Changes</button>
 
