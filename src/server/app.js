@@ -32,5 +32,4 @@
   errorConfig.init(app);
 
   module.exports = app;
-
 }());
