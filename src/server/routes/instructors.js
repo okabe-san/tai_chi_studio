@@ -84,7 +84,6 @@ router.get('/:id', function (req, res, next) {
 router.post('/new', (req, res, next) => {
   knex('instructors')
   .insert({
-    // id: 5,
     names: req.body.names,
     biography: req.body.biography,
     photo_url: req.body.photo_url

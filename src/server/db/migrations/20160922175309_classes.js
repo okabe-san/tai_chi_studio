@@ -10,7 +10,6 @@ exports.up = function(knex, Promise) {
     table.string('end_time').notNullable();
     table.integer('size').notNullable().defaultTo(10);
   });
-
 };
 
 exports.down = function(knex, Promise) {

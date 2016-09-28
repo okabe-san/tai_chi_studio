@@ -15,14 +15,14 @@ exports.seed = function(knex, Promise) {
     knex('instructors').insert({
       id: 3,
       names: 'Akiko Okabe',
-      biography: 'Akiko began studying Tai Chi with Master Li in 2000 in my hometown of Tokyo, Japan. She fell in love with this style of Tai Chi/Qi Gong because it integrated movement and mindfulness into one practice. She started my Nam Hoa Tai Chi instructor training in January of 2007.',
+      biography: 'Akiko began studying Tai Chi with Master Li in 2000 in her hometown of Tokyo, Japan. She fell in love with Tai Chi/Qi Gong because it integrated movement and mindfulness into one practice. She started her Nam Hoa Tai Chi instructor training in January of 2007.',
       photo_url: 'taichii10.jpg'
     }),
     knex('instructors').insert({
       id: 4,
       names: 'Phil Benz',
-      biography: 'BAMF',
-      photo_url: 'test'
+      biography: 'Phil Has studied Wu and Chen Style Taijiquan, and qigong for over 20 years. His Wu style study included instruction from disciples of Wu Chien Chuan and Wu Kong Yi, lineage holders of Wu taijiquan. Phil\'s primary interest is in taijiquan for health, and to further his understanding he has been studying anatomy, physiology, kinesiology, and exercise science.',
+      photo_url: 'taichii12.jpg'
     })
   ]);
 };
