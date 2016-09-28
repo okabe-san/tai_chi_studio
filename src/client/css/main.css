@@ -42,6 +42,7 @@ header {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 100 !important;
   clear: both;
+  overflow-x: hidden;
 }
 
 .nav ul {
@@ -171,10 +172,20 @@ footer {
 
 @media screen and (max-width: 768px) {
   header {
-    height: 200px;
+    height: 180px;
+    background-color: rgba(255, 255, 255, 1);
   }
+
+  .nav .right {
+    background-color: rgba(0, 0, 0, .3);
+  }
+
   .container {
     margin-top: 150px;
+  }
+
+  footer {
+    background-color: rgba(255, 255, 255, 1);
   }
 }
 

@@ -5,7 +5,7 @@
 {% block content %}
 
   <div class="container">
-    <h2>Instructors:</h2>
+    <h2>Instructors</h2>
     {% for instructor in instructor %}
     <div class="col-xs-12 col-md-4 window">
         <h3><a href="/instructors/{{instructor.id}}">{{instructor.names}}</a></h3>
@@ -15,7 +15,7 @@
     </div>
     {% endfor %}
     <div class="col-xs-12 col-md-5 addmin">
-      <h1>Admin Area:</h1>
+      <h1>Admin Area</h1>
       <h3><a href="/instructors/new" type="button" class="btn btn-primary">Add New instructor</a></h3>
       <button class="btn btn-primary edit-instructor">Edit instructor</button>
       Please select an instructor from a dropdow menu.
