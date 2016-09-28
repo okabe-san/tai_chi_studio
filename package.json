@@ -46,8 +46,7 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
-  },
+  "description": "",
   "engines": {
     "node": "6.6.0"
   }
