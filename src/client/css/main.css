@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, p {
   color: #666;
 }
 
-h3, h3 a {
+h3, h3 :hover, h3 a {
   color: #669900;
   font-style: italic;
 }
@@ -125,6 +125,11 @@ header {
   font-size: 24px;
 }
 
+/* instractors page */
+.window {
+  display: inline-block;
+}
+
 /* review page */
 .review {
   margin: 2rem;
@@ -133,6 +138,11 @@ header {
 
 .wrap {
   padding: 2rem 0;
+}
+
+.addmin {
+  padding-top: 40px;
+  clear: both;
 }
 
 .review p::first-letter {

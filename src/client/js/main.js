@@ -78,16 +78,3 @@ $('#edit_class_func').on('click', function(e) {
     console.log(err);
   });
 });
-
-/* globals google */
-function initMap() {
-  var uluru = {lat: 39.742043, lng: -104.991531};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: uluru
-  });
-  var marker = new google.maps.Marker({
-    position: uluru,
-    map: map
-  });
-}
