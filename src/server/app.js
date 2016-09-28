@@ -3,7 +3,7 @@
   'use strict';
 
   var passport = require('passport');
-  var LocalStrategy = require('passport-local').Strategy;
+  //var LocalStrategy = require('passport-local').Strategy;
   var cookieParser = require('cookie-parser');
   var bodyParser = require('body-parser');
   var path = require('path');
@@ -32,5 +32,4 @@
   errorConfig.init(app);
 
   module.exports = app;
-
 }());

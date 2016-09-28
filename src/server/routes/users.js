@@ -78,8 +78,8 @@ router.post('/signup', function (req, res, next) {
   })
   .then((results) => {
       if (results) {
-        console.log('Success');
-        res.send(200);
+        console.log('Success results: ', results);
+        res.json({ results });
       } else {
         res.status(500).send({
           status: 'error',
@@ -109,13 +109,13 @@ router.post('/signin', function (req, res, next) {
       console.log('results: ', results[0].password);
       req.session.user = {
         email: results[0].email,
-        is_admin: results[0].first_name,
+        first_name: results[0].first_name,
         id: results[0].id
       };
 
       var renderObject = {
         email: results[0].email,
-        is_admin: results[0].first_name,
+        first_name: results[0].first_name,
         id: results[0].id
       };
 
