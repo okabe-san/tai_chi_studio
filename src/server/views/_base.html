@@ -17,6 +17,28 @@
     <link rel="stylesheet" href="/css/main.css">
     {% block css %}{% endblock %}
   </head>
+  <header>
+    <nav class="nav">
+      <ul>
+        <li class="current-menu-item"><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/classes">Classes</a>
+          <!-- <ul>
+            <li><a href="#">Sub Menu 1</a></li>
+            <li><a href="#">Sub Menu 2</a></li>
+            <li><a href="#">Sub Menu 3</a></li>
+          </ul> -->
+        </li>
+        <li><a href="/instructors">Instructors</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="/users/signup">Get One Week Free Lessons?</a></li>
+        <li class="current-menu-item"><a href="/users/signin">Log In</a></li>
+        <li><a href="/users/logout" id="logout">Log Out</a></li>
+      </ul>
+    </nav>
+  </header>
   <body>
       {% block content %}
       {% endblock %}
@@ -24,6 +46,9 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="/js/newclass.js"></script>
+    <script type="text/javascript" src="/js/review.js"></script>
+    <script type="text/javascript" src="/js/user_logout.js"></script>
+    <script type="text/javascript" src="/js/fortuneCookie.js"></script>
     {% block scripts %}{% endblock %}
   </body>
 </html>

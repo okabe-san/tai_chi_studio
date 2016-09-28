@@ -4,73 +4,71 @@
 
 {% block content %}
 <div>
-<form class="form-horizontal">
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="inputEmail">Email</label>
+      <div>
         <p id="email" placeholder="Email">{{ renderObject.email }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="first_name" class="col-lg-2 control-label">First Name</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="first_name">First Name</label>
+      <div>
         <p id="firstName">{{ renderObject.first_name }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="last_name" class="col-lg-2 control-label">Last Name</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="last_name">Last Name</label>
+      <div>
         <p id="lastName">{{ renderObject.last_name }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">Street Address 1</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="address_line_1">Street Address 1</label>
+      <div>
         <p id="line_1">{{ renderObject.address_line_1 }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="address_line_2" class="col-lg-2 control-label">Street Address 2</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="address_line_2">Street Address 2</label>
+      <div>
         <p id="line 2">{{ renderObject.address_line_2 }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">City</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="city">City</label>
+      <div>
         <p id="city">{{ renderObject.city }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">State</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="state">State</label>
+      <div>
         <p id="state">{{ renderObject.state}}
       </div>
     </div>
-    <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">Zip</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="zip">Zip</label>
+      <div>
         <p id="zip">{{ renderObject.zip }}
       </div>
     </div>
-    <div class="form-group">
-      <label for="comments" class="col-lg-2 control-label">What should we know about you?</label>
-      <div class="col-lg-10">
+    <div>
+      <label for="comments">What should we know about you?</label>
+      <div>
         <p id="comments">{{ renderObject.comments}}
       </div>
     </div>
-    <div class="form-group">
-      <label for="Password" class="col-lg-2 control-label">Password</label>
-      <div class="col-lg-10">
-        <p id="Password" placeholder="Password">{{ renderObject.password}}
+    <div>
+      <label for="Password">Password</label>
+      <div>
+        <p id="Password">{{ renderObject.password}}
       </div>
+      <p type="hidden" id="user_id">{{ renderObject.id }}</p>
     </div>
-    <input id="#user_id">{{ renderObject.id }}
-    <div class="form-group">
-      <input type="button"  id="saveUserButton" method="post" activity="/users/edit_user" value="Save">
-      <input type="button" value="Cancel" method="get" activity="/">
+    <div>
+        <a href="/users/edit/user_edit_profile" id="editProfile">Edit</a>
     </div>
-  </form>
 </div>
 
+<script type="text/javascript" src="/js/edit_user.js"></script>
 {% endblock %}

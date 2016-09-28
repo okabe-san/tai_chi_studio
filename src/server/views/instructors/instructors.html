@@ -5,40 +5,37 @@
 {% block content %}
 
   <div class="container">
-    <h1>Instructors:</h1>
+    <h2>Instructors:</h2>
     {% for instructor in instructor %}
-      <a href="/instructors/{{instructor.id}}">{{instructor.names}}</a>
-      <br>
-      {{instructor.biography}}
-      <br>
-      {{instructor.photo_url}}
-      <br>
-      {{instructor.rating | safe}}
-      <br>
+      <h3><a href="/instructors/{{instructor.id}}">{{instructor.names}}</a></h3>
+      <p>{{instructor.biography}}</p>
+      <p>{{instructor.rating | safe}}</p>
+      <hr>
     {% endfor %}
 
     <h1>Admin Area:</h1>
-    <a href="/instructors/new" type="button" class="btn btn-default">Add New instructor</a>
+    <h3><a href="/instructors/new" type="button" class="btn btn-primary">Add New instructor</a></h3>
+    <button class="btn btn-primary edit-instructor">Edit instructor</button>
+    Please select an instructor from a dropdow menu.
     <br>
     <select id="editId" class="form-control">
-      {% for instructor in instructor %}
+    {% for instructor in instructor %}
       <option value="{{instructor.id}}">
-        {{instructor.names}}
+      {{instructor.names}}
       </option>
-      {% endfor %}
+    {% endfor %}
     </select>
-    <div id="test">
-    <button class="btn btn-default edit-instructor">Edit instructor</button>
-    </div>
     <br>
+    <button class="btn btn-sm btn-primary delete-instructor">Delete</button>
+    Please select an instructor from a dropdow menu.
     <select id="deleteId" class="form-control">
-      {% for instructor in instructor %}
+    {% for instructor in instructor %}
       <option value="{{instructor.id}}">
-        {{instructor.names}}
+      {{instructor.names}}
       </option>
-      {% endfor %}
+    {% endfor %}
     </select>
-    <button class="btn btn-sm btn-success delete-instructor">Delete</button>
+
   </div>
 
 {% endblock %}

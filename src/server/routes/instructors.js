@@ -120,7 +120,6 @@ router.post('/edit/:id', (req, res, next) => {
 // delete instractor (delete instractor and review)
 router.delete('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-
   knex('reviews')
   .del()
   .where({

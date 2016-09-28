@@ -1,3 +1,16 @@
+h1 {
+  font-size: 48px
+}
+
+h1, h2, h3, h4, h5, p {
+  color: #666;
+}
+
+h3, h3 a {
+  color: #669900;
+  font-style: italic;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -6,6 +19,12 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+img {
+  max-width: 350px;
+  max-height: 350px;
+  border: 1px solid #999;
 }
 
 .alert {
@@ -21,11 +40,8 @@ header {
   width: 100%;
   height: 50px;
   background-color: rgba(255, 255, 255, 0.7);
+  z-index: 100 !important;
   clear: both;
-}
-
-.nav {
-	clear: both;
 }
 
 .nav ul {
@@ -81,6 +97,7 @@ header {
   margin: 0;
   padding: 60px;
   background-color: #f2f2f2;
+  position: relative;
 }
 
 .bannerWrapper {
@@ -105,8 +122,30 @@ header {
 
 .bannerText p {
   font-family: 'Sarina', cursive;
-  font-size: 36px;
+  font-size: 24px;
 }
+
+/* review page */
+.review {
+  margin: 2rem;
+  padding: 1rem;
+}
+
+.wrap {
+  padding: 2rem 0;
+}
+
+.review p::first-letter {
+  font-size: 150%;
+  color: #333;
+}
+
+/* contact us page */
+#map {
+  width: 100%;
+  height: 400px;
+  background-color: grey;
+ }
 
 /* footer */
 footer {
@@ -118,4 +157,13 @@ footer {
   width: 100%;
   height: 50px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    height: 200px;
+  }
+  .container {
+    margin-top: 150px;
+  }
 }

@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
+const userFunctions = require('../controllers/index');
+const chen = 'Chen style tai chi movements of the Chen Style\'s first level of training are done in slow motion. The Chen style alternates slow-motion movements with short, fast, explosive ones. It demands more physical coordination and may strain the lower back and knees more than other styles; consequently, it is difficult for the elderly or injured to learn. The complexity of its movements, which include fast releases combined with jumping kicks and stamping actions, makes it more athletic and physically difficult than most other tai chi styles and, as such, is often more appealing to young people or martial artists.';
+
+const wu = 'Wu style tai chi is the second most popular style. It has three main variations with strong stylistic differences that derived from the founder, Chuan You, his son, Wu Jien Chuan, and his grandchildren. The Wu style was created directly from the Yang and, as such, is the largest variant of the Yang style. However, unlike most traditions in the Yang style, most Wu schools emphasize small, compact movements over large and medium-sized ones. The Yang and Wu, with all their variations, encompass the vast majority (80 percent or more) of all tai chi practitioners.';
+
+const yang = 'Yang style tai chi is the most popular and widely practiced tai chi style worldwide. In England and America, at least 20 main variations of the Yang style exist and in China, there are even more. The various schools originated from the approach of a specific master or from a particular geographic region within China. Each variation has a distinct flavor, looks different from the others to a greater or lesser degree and may emphasize different technical points.';
+
+const hao = 'Hao style tai chi is exceedingly rare in China and almost non-existent in the West. Its small-frame movements are extremely small. Its primary focus is on tai chi\'s more internal chi movements with physical motions being much less important. As such, it is considered an advanced style that is hard to appreciate for practitioners without significant background knowledge of tai chi.';
 
 //gets ALL class
 router.get('/', (req, res, next) => {
@@ -25,6 +33,7 @@ router.get('/', (req, res, next) => {
 ///gina is below this line
 
 //get class info for new class forms
+
 router.get('/new',(req, res, next) => {
   function getUnique(tableName, column) {
     return knex(tableName).distinct(column).select(column).orderBy(column, 'asc');
@@ -134,6 +143,9 @@ router.get('/:id/class/edit', function (req, res, next) {
   .then((results) => {
     const renderObject = {};
     console.log(results);
+    //console.log(results);
+    renderObject.id = id;
+    //console.log(renderObject.id);
     renderObject.classes = results[0];
     renderObject.instructors = results[1];
     renderObject.days = results[2];
@@ -160,4 +172,92 @@ router.get('/:id/class/edit', function (req, res, next) {
 //   end_time: req.body.end_time,
 //   size: req.body.size
 // })
+router.post('/:id/class/edit', (req, res, next) => {
+    if (req.body.name === 'Chen style') {
+      req.body.description = chen;
+    }
+    if (req.body.name === 'Wu style') {
+      req.body.description = wu;
+    }
+    if (req.body.name === 'Yang style') {
+      req.body.description = yang;
+    }
+    if (req.body.name === 'Hao style') {
+      req.body.description = hao;
+    }
+    if (req.body.start_time === '05:00 am') {
+      req.body.end_time = '06:00 am';
+    }
+    if (req.body.start_time === '06:00 am') {
+      req.body.end_time = '07:00 am';
+    }
+    if (req.body.start_time === '07:00 am') {
+      req.body.end_time = '08:00 am';
+    }
+    if (req.body.start_time === '08:00 am') {
+      req.body.end_time = '09:00 am';
+    }
+    if (req.body.start_time === '09:00 am') {
+      req.body.end_time = '10:00 am';
+    }
+    if (req.body.start_time === '10:00 am') {
+      req.body.end_time = '11:00 am';
+    }
+    if (req.body.start_time === '11:00 am') {
+      req.body.end_time = '12:00 pm';
+    }
+    if (req.body.start_time === '12:00 pm') {
+      req.body.end_time = '01:00 pm';
+    }
+    if (req.body.start_time === '01:00 pm') {
+      req.body.end_time = '02:00 pm';
+    }
+    if (req.body.start_time === '02:00 pm') {
+      req.body.end_time = '03:00 pm';
+    }
+    if (req.body.start_time === '03:00 pm') {
+      req.body.end_time = '04:00 pm';
+    }
+    if (req.body.start_time === '04:00 pm') {
+      req.body.end_time = '05:00 pm';
+    }
+    if (req.body.start_time === '05:00 pm') {
+      req.body.end_time = '06:00 pm';
+    }
+    if (req.body.start_time === '06:00 pm') {
+      req.body.end_time = '07:00 pm';
+    }
+    if (req.body.start_time === '07:00 pm') {
+      req.body.end_time = '08:00 pm';
+    }
+    if (req.body.start_time === '08:00 pm') {
+      req.body.end_time = '09:00 pm';
+    }
+    if (req.body.start_time === '09:00 pm') {
+      req.body.end_time = '10:00 pm';
+    }
+
+    const id = parseInt(req.params.id);
+    knex('classes')
+    .where('classes.id', id)
+    .update({
+      name: req.body.name,
+      description: req.body.description,
+      instructor_id: req.body.instructor_id,
+      day: req.body.day,
+      start_time: req.body.start_time,
+      end_time: req.body.end_time,
+      size: req.body.size
+    })
+    .returning('*')
+    .then((results) => {
+      console.log('UPDATE: ', results);
+      res.redirect('/classes');
+    })
+    .catch((err) => {
+      console.log(err);
+      return next(err);
+    });
+  });
+
 module.exports = router;

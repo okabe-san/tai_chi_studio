@@ -32,6 +32,29 @@ router.get('/verify', function (req, res, next) {
     });
 });
 
+router.get('/viewuser/:id', function (req, res, next) {
+  console.log('here is the req: ', req.body);
+
+  var renderObject = {};
+
+  knex('users')
+  .where({
+    email: req.body.email,
+    password: req.body.password
+  })
+  .select()
+  .then((results) => {
+    renderObject = results[0];
+    console.log('renderObject: ', renderObject);
+    res.json(renderObject);
+  })
+  .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.render('validation/signin');
+    });
+});
+
 //get the the page that allows a user to sign up with the studio (new user)
 router.post('/signup', function (req, res, next) {
   // Hash the password with the salt
@@ -81,10 +104,24 @@ router.post('/signin', function (req, res, next) {
   .where({
     email: req.body.email
   })
-  .select('password')
   .then((results) => {
     if (bcrypt.compareSync(req.body.password, results[0].password)) {
-      res.redirect('/classes');
+      console.log('results: ', results[0].password);
+      req.session.user = {
+        email: results[0].email,
+        is_admin: results[0].first_name,
+        id: results[0].id
+      };
+
+      var renderObject = {
+        email: results[0].email,
+        is_admin: results[0].first_name,
+        id: results[0].id
+      };
+
+      var url = '/users/' + results[0].id;
+      //res.json('log in successful');
+      res.status(200).json(renderObject);
     } else {
       res.status(500).send({
         status: 'error',
@@ -98,25 +135,36 @@ router.post('/signin', function (req, res, next) {
   });
 });
 
-//gets to the page that allows a user to log in (not a new user)
+//view a users profile
 router.get('/:id', function (req, res, next) {
   var member_id = req.params.id;
-  console.log('the req', req.body);
+
+  console.log('here is the get');
+  console.log('the req session: ', req.session);
   var renderObject = {};
   //select from users by id
   //populate edit fields
-
+  console.log('member: ', member_id);
   knex('users')
   .where('id', member_id)
   .then((results) => {
     renderObject = results[0];
     console.log('renderObject: ', renderObject);
-    res.render('users_edit_profile', {renderObject});
+    res.render('user_profile', {renderObject});
   });
 });
 
-router.put('/edit/:id', function (req, res, next) {
-    res.render('users_edit_profile');
+router.get('/edit/user_edit_profile', function (req, res, next) {
+    console.log('here in edit with req: ', req.session);
+    console.log('here in user edit profile');
+
+    res.render('user_edit_profile');
+  });
+
+router.get('/user/logout', (req, res, next) => {
+    console.log('in logout');
+    req.logout();
+    res.status(200).json({message:'success'});
   });
 
 module.exports = router;
