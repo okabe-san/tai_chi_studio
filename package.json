@@ -1,11 +1,14 @@
 {
-  "name": "passport-local-express4",
+  "name": "studio",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./src/server/server",
     "test": "./node_modules/mocha/bin/_mocha"
   },
+  "engines": {
+   "node": "6.3.0"
+ },
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "~1.15.1",
@@ -46,5 +49,8 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": "6.6.0"
+  }
 }
