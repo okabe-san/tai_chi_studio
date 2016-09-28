@@ -52,4 +52,4 @@ module.exports = {
       directory: __dirname + '/src/server/db/seeds'
     }
   }
-};
+}
