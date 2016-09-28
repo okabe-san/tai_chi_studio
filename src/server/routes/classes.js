@@ -61,17 +61,43 @@ router.get('/new',(req, res, next) => {
   });
 });
 
-router.post('/new', (req, res, next) => {
-
+router.post('/', (req, res, next) => {
+  console.log('post ', req.body);
+  const className = req.body.name;
+  const description = req.body.description;
+  const instructor_id = req.body.instructor_id;
+  const start_time = req.body.start_time;
+  const end_time = req.body.end_time;
+  const size = req.body.size;
+  const day = req.body.day;
+  knex('classes')
+  .insert(
+    {
+      name: className,
+      description: description,
+      instructor_id: instructor_id,
+      day: day,
+      start_time: start_time,
+      end_time: end_time,
+      size: size
+    })
+    .then((data) => {
+      res.send({
+        redirect: '/'
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 //gets ONE class
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
-  knex('class')
-  .join('instructor', 'instructor.id', 'instructor_id')
-  .select('*', 'class.id')
-  .where('class.id', id)
+  knex('classes')
+  .join('instructors', 'instructor.id', 'instructor_id')
+  .select('*', 'classes.id')
+  .where('classes.id', id)
   .then((results) => {
     const renderObject = {};
     if (results.length === 0) {

@@ -20,11 +20,30 @@ $(document).on('ready', () => {
       }
     }
     const className = $('.nameOfClass option:selected').val();
-    const description = $('.description').val();
-    const instructorId = $('.instructorID option:selected').attr();
-    console.log(instructorId);
+    const description = $('#description').val();
+    const instructorId = $('.instructorID option:selected').attr('data-instructorid');
     const startTime = convertTime($('#start_time').val());
     const endTime = convertTime($('#end_time').val());
     const classSize = $('#size').val();
+    const classDay = $('#classDay').val();
+    $.ajax({
+      type: 'POST',
+      url: '/classes',
+      data: {
+        name: className,
+        description: description,
+        instructor_id: instructorId,
+        day: classDay,
+        start_time: startTime,
+        end_time: endTime,
+        size: classSize
+      },
+      success: (result) => {
+        console.log('good job');
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   });
 });
