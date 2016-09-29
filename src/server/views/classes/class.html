@@ -7,6 +7,7 @@
   <div class="container">
 
     <div class="row">
+
       <div class="col-md-5">
       {% for class in classes %}
         <h2>{{class.name}}</h2><br><br>
@@ -26,13 +27,16 @@
       </div>
     </div>
     <br><br>
+    {{user.is_admin}}
+    {% if user.is_admin %}
+    test
     <div class="row">
       <div class="col-md-12">
         <h3>Enrollment</h3>
 
         <table class="table table-hover">
           <tr>
-            <th>Accepeted Liability</th>
+            <th>Accepted Liability</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -62,6 +66,7 @@
         </table>
     </div>
   </div>
+  {% endif %}
 </div>
 
 {% endblock %}
