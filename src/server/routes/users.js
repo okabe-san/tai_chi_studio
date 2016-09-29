@@ -10,8 +10,6 @@ router.get('/signup', function (req, res, next) {
 });
 
 router.get('/verify', function (req, res, next) {
-  console.log('here is the req: ', req.body);
-
   var renderObject = {};
 
   knex('users')
@@ -32,21 +30,18 @@ router.get('/verify', function (req, res, next) {
     });
 });
 
-router.get('/viewuser/:id', function (req, res, next) {
-  console.log('here is the req: ', req.body);
-
+router.get('/viewuser', function (req, res, next) {
   var renderObject = {};
 
   knex('users')
   .where({
-    email: req.body.email,
-    password: req.body.password
+    email: req.session.user.email
   })
   .select()
   .then((results) => {
     renderObject = results[0];
     console.log('renderObject: ', renderObject);
-    res.json(renderObject);
+    res.render('user_profile', {renderObject});
   })
   .catch((err) => {
       console.log(err);
@@ -136,11 +131,8 @@ router.post('/signin', function (req, res, next) {
 });
 
 //view a users profile
-router.get('/:id', function (req, res, next) {
+router.get('/view', function (req, res, next) {
   var member_id = req.params.id;
-
-  console.log('here is the get');
-  console.log('the req session: ', req.session);
   var renderObject = {};
   //select from users by id
   //populate edit fields
@@ -149,16 +141,29 @@ router.get('/:id', function (req, res, next) {
   .where('id', member_id)
   .then((results) => {
     renderObject = results[0];
-    console.log('renderObject: ', renderObject);
     res.render('user_profile', {renderObject});
   });
 });
 
 router.get('/edit/user_edit_profile', function (req, res, next) {
-    console.log('here in edit with req: ', req.session);
-    console.log('here in user edit profile');
+    console.log('here in edit with req: ', req.session.user);
+    var renderObject = {};
 
-    res.render('user_edit_profile');
+    knex('users')
+    .where({
+      email: req.session.user.email
+    })
+    .select()
+    .then((results) => {
+      renderObject = results[0];
+      console.log('renderObject: ', renderObject);
+      res.render('user_edit_profile', {renderObject});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500);
+        res.render('validation/signin');
+      });
   });
 
 router.get('/user/logout', (req, res, next) => {
