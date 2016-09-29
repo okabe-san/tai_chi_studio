@@ -303,7 +303,7 @@ router.delete('/:id/class/delete/user', function (req, res, next) {
     .catch((err) => {
       console.log(err);
       return next(err);
-    })
+    });
   });
 });
 
