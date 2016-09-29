@@ -5,12 +5,12 @@
 {% block content %}
 
 <div class="container">
-  <h1>Review instractor</h1>
+  <h2>Review instractor</h2>
   <form name="review_form" method="POST" action="/reviews/{{instructor[0].id}}">
-    <h1>instructor Name:</h1>
-    {{instructor[0].names}}
+    <h4>instructor Name:</h4>
+    <h3>{{instructor[0].names}}</h3>
     <div class="form-group">
-      <h1>Review:</h1>
+      <h4>Review:</h4>
       <textarea class="form-control" rows="5" id="input_review" name="input_review"></textarea>
     </div>
 

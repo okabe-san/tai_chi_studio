@@ -13,8 +13,7 @@
         url: '/users/user/logout'
       })
       .done((data) => {
-        sessionStorage.setItem('email', '');
-        sessionStorage.setItem('id', '');
+        sessionStorage.clear();
         window.location.href = '/';
       });
     });

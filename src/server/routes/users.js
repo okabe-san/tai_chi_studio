@@ -10,8 +10,6 @@ router.get('/signup', function (req, res, next) {
 });
 
 router.get('/verify', function (req, res, next) {
-  console.log('here is the req: ', req.body);
-
   var renderObject = {};
 
   knex('users')
@@ -32,21 +30,19 @@ router.get('/verify', function (req, res, next) {
     });
 });
 
-router.get('/viewuser/:id', function (req, res, next) {
-  console.log('here is the req: ', req.body);
-
+router.get('/viewuser', function (req, res, next) {
   var renderObject = {};
 
   knex('users')
   .where({
-    email: req.body.email,
-    password: req.body.password
+    email: req.session.user.email
   })
   .select()
   .then((results) => {
     renderObject = results[0];
+    renderObject.is_admin = req.session.user.is_admin;
     console.log('renderObject: ', renderObject);
-    res.json(renderObject);
+    res.render('user_profile', {renderObject});
   })
   .catch((err) => {
       console.log(err);
@@ -74,12 +70,13 @@ router.post('/signup', function (req, res, next) {
     zip: req.body.zip,
     liability: req.body.liability,
     comments: req.body.comments,
-    password: hash
+    password: hash,
+    is_admin: req.body.is_admin
   })
   .then((results) => {
       if (results) {
-        console.log('Success');
-        res.send(200);
+        console.log('Success results: ', results);
+        res.json({ results });
       } else {
         res.status(500).send({
           status: 'error',
@@ -109,14 +106,16 @@ router.post('/signin', function (req, res, next) {
       console.log('results: ', results[0].password);
       req.session.user = {
         email: results[0].email,
-        is_admin: results[0].first_name,
-        id: results[0].id
+        first_name: results[0].first_name,
+        id: results[0].id,
+        is_admin: results[0].is_admin
       };
 
       var renderObject = {
         email: results[0].email,
-        is_admin: results[0].first_name,
-        id: results[0].id
+        first_name: results[0].first_name,
+        id: results[0].id,
+        is_admin: results[0].is_admin
       };
 
       var url = '/users/' + results[0].id;
@@ -136,11 +135,8 @@ router.post('/signin', function (req, res, next) {
 });
 
 //view a users profile
-router.get('/:id', function (req, res, next) {
+router.get('/view', function (req, res, next) {
   var member_id = req.params.id;
-
-  console.log('here is the get');
-  console.log('the req session: ', req.session);
   var renderObject = {};
   //select from users by id
   //populate edit fields
@@ -149,20 +145,34 @@ router.get('/:id', function (req, res, next) {
   .where('id', member_id)
   .then((results) => {
     renderObject = results[0];
-    console.log('renderObject: ', renderObject);
     res.render('user_profile', {renderObject});
   });
 });
 
 router.get('/edit/user_edit_profile', function (req, res, next) {
-    console.log('here in edit with req: ', req.session);
-    console.log('here in user edit profile');
+    console.log('here in edit with req: ', req.session.user);
+    var renderObject = {};
 
-    res.render('user_edit_profile');
+    knex('users')
+    .where({
+      email: req.session.user.email
+    })
+    .select()
+    .then((results) => {
+      renderObject = results[0];
+      console.log('renderObject: ', renderObject);
+      res.render('user_edit_profile', {renderObject});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500);
+        res.render('validation/signin');
+      });
   });
 
 router.get('/user/logout', (req, res, next) => {
     console.log('in logout');
+    req.session.user = {};
     req.logout();
     res.status(200).json({message:'success'});
   });

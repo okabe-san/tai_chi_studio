@@ -24,7 +24,10 @@ router.get('/', (req, res, next) => {
   ])
   .then((results) => {
     const renderObject = {};
-    renderObject.classes = results[0];
+    renderObject.classes = results[0].map(function(el) {
+      el.start_time = el.start_time.replace(':', '');
+      return el;
+    });
     renderObject.instructors = results[1];
     res.render('classes/classes', renderObject);
   });
@@ -34,9 +37,7 @@ router.get('/', (req, res, next) => {
 
 //get class info for new class forms
 
-
 //get class info for new class forms
-
 router.get('/new',(req, res, next) => {
   function getUnique(tableName, column) {
     return knex(tableName).distinct(column).select(column).orderBy(column, 'asc');
@@ -63,49 +64,80 @@ router.get('/new',(req, res, next) => {
   });
 });
 
-router.post('/new', (req, res, next) => {
-
+router.post('/', (req, res, next) => {
+  console.log('post ', req.body);
+  const className = req.body.name;
+  const description = req.body.description;
+  const instructor_id = req.body.instructor_id;
+  const start_time = req.body.start_time;
+  const end_time = req.body.end_time;
+  const size = req.body.size;
+  const day = req.body.day;
+  knex('classes')
+  .insert(
+    {
+      name: className,
+      description: description,
+      instructor_id: instructor_id,
+      day: day,
+      start_time: start_time,
+      end_time: end_time,
+      size: size
+    })
+    .then((data) => {
+      res.send({
+        redirect: '/'
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
-//gets ONE class
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
-  knex('class')
-  .join('instructor', 'instructor.id', 'instructor_id')
-  .select('*', 'class.id')
-  .where('class.id', id)
+  knex('classes')
+  .join('instructors', 'instructors.id', 'instructor_id')
+  .where('classes.id', id)
+  .select('*', 'classes.id')
   .then((results) => {
-    const renderObject = {};
-    if (results.length === 0) {
-      console.log(results);
-      renderObject.noclasses = 'There was no class found.';
-      res.render('classes/classes', renderObject);
-    } else {
+    //console.log('RESULTS FROM CLASS INS JOIN', results);
+    knex('users')
+    .join('classes_users', 'classes_users.user_id', 'users.id')
+    .join('classes', 'classes.id', 'classes_users.class_id')
+    .where('classes.id', id)
+    .select('*')
+    .then((data) => {
+      //console.log('RESULTS FROM USER/CU JOIN', data);
+      const renderObject = {};
       renderObject.classes = results;
+      renderObject.users = data;
+      renderObject.user = req.session.user;
+      console.log('in classes: ', renderObject);
       res.render('classes/class', renderObject);
-    }
+    });
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
   });
 });
 
 //gets ONE class to delete using button
 router.delete('/:id/class/delete', function (req, res, next) {
+  console.log('HITTING THE DELETE CLASS ROUTE');
   const id = parseInt(req.params.id);
-  knex('class')
+  knex('classes')
   .del()
   .where('id', id)
   .returning('*')
   .then((result) => {
     console.log('item you deleted', result);
     const id = result[0].instructor_id;
-    knex('class')
+    knex('classes')
     .where('id', id)
     .then((result) => {
       if (result.length === 0) {
-        return knex('instructor')
+        return knex('instructors')
         .del()
         .where('id', id)
         .returning('*');
@@ -162,18 +194,6 @@ router.get('/:id/class/edit', function (req, res, next) {
     return next(err);
   });
 });
-
-//post the one class so admin can
-// knex('class')
-// .insert({
-//   name: req.body.class_name,
-//   description: req.body.description,
-//   instructor_id: req.body.instructor_id,
-//   day: req.body.day,
-//   start_time: req.body.start_time,
-//   end_time: req.body.end_time,
-//   size: req.body.size
-// })
 
 router.post('/:id/class/edit', (req, res, next) => {
     if (req.body.name === 'Chen style') {
@@ -262,5 +282,34 @@ router.post('/:id/class/edit', (req, res, next) => {
       return next(err);
     });
   });
+
+router.delete('/:id/class/delete/user', function (req, res, next) {
+  console.log('DATA GOT FROM AJAX REQUEST', req.body);
+  const userID = parseInt(req.body.user_id);
+  const classID = parseInt(req.body.classes_id);
+  knex('classes_users')
+  .where({
+    user_id: userID,
+    class_id: classID
+  })
+  .returning('*')
+  .then((results) => {
+    knex('classes_users')
+    .del()
+    .where('user_id', userID)
+    .where('class_id', classID)
+    .returning('*')
+    .then((results) => {
+      console.log(results);
+      res.send({
+        message: 'Delete was successful.'
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return next(err);
+    });
+  });
+});
 
 module.exports = router;

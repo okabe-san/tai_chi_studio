@@ -1,8 +1,6 @@
 
 (function () {
-
-    console.log('users sanity check!');
-
+    console.log('users sign up sanity check!');
     $('#saveUserButton').on('click', (event) => {
       event.preventDefault();
 
@@ -34,7 +32,8 @@
           zip: $('#zip').val(),
           liability: true,
           comments: $('#comments').val(),
-          password: $('#inputPassword').val()
+          password: $('#inputPassword').val(),
+          is_admin: $('#input_is_admin').val()
         };
 
         //PUT request with payload for server
@@ -44,10 +43,12 @@
           data: userPayload
         })
         .done((data) => {
-          sessionStorage.setItem('email', $('#email').text());
-          sessionStorage.setItem('first_name', $('#firstName').text());
-          sessionStorage.setItem('id', $('#user_id').text());
-          window.location.href = '/users/' + $('#user_id').text();
+          console.log('here is the return data: ', data);
+          sessionStorage.setItem('email', userPayload.email);
+          sessionStorage.setItem('first_name', userPayload.first_name);
+          sessionStorage.setItem('id', data.results[0]);
+          sessionStorage.setItem('is_admin', data.results[0]);
+          window.location.href = '/';
         });
       }
     });

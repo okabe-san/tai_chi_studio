@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, p {
   color: #666;
 }
 
-h3, h3 a {
+h3, h3 :hover, h3 a {
   color: #669900;
   font-style: italic;
 }
@@ -42,6 +42,7 @@ header {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 100 !important;
   clear: both;
+  overflow-x: hidden;
 }
 
 .nav ul {
@@ -125,6 +126,11 @@ header {
   font-size: 24px;
 }
 
+/* instractors page */
+.window {
+  display: inline-block;
+}
+
 /* review page */
 .review {
   margin: 2rem;
@@ -133,6 +139,11 @@ header {
 
 .wrap {
   padding: 2rem 0;
+}
+
+.addmin {
+  padding-top: 40px;
+  clear: both;
 }
 
 .review p::first-letter {
@@ -161,9 +172,48 @@ footer {
 
 @media screen and (max-width: 768px) {
   header {
-    height: 200px;
+    height: 180px;
+    background-color: rgba(255, 255, 255, 1);
   }
+
+  .nav .right {
+    background-color: rgba(0, 0, 0, .3);
+  }
+
   .container {
     margin-top: 150px;
   }
+
+  footer {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+.about-us {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+@media screen and (max-width: 768px) {
+.about_photo img {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+.about_photo img {
+  height: 350px;
+  width: 350px;
+}
+
+.contact-info {
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 80px;
+  border-top: 1px #666 solid;
+}
+
+.like-us {
+  margin-top: 80px;
+  margin-left: 150px;
 }

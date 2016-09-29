@@ -21,9 +21,11 @@ router.get('/', function (req, res, next) {
         });
       });
       const renderObject = {};
+      renderObject.admin = req.session.user;
       renderObject.instructor = data;
       res.render('instructors/instructors', renderObject);
     });
+
   })
   .catch((err) => {
     console.log(err);
@@ -84,6 +86,7 @@ router.get('/:id', function (req, res, next) {
 router.post('/new', (req, res, next) => {
   knex('instructors')
   .insert({
+    // id: 10,
     names: req.body.names,
     biography: req.body.biography,
     photo_url: req.body.photo_url

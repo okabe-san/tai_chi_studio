@@ -17,10 +17,11 @@
         data: userPayload
       })
       .done((data) => {
-        console.log('data: ', data);
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('id', data.id);
-        window.location.href = '/users/' + data.id;
+        sessionStorage.setItem('first_name', data.first_name);
+        sessionStorage.setItem('is_admin', data.is_admin);
+        window.location.href = '/';
       });
     });
 })();
