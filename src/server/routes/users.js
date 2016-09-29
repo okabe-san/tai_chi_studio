@@ -172,6 +172,7 @@ router.get('/edit/user_edit_profile', function (req, res, next) {
 
 router.get('/user/logout', (req, res, next) => {
     console.log('in logout');
+    req.session.user = {};
     req.logout();
     res.status(200).json({message:'success'});
   });
