@@ -20,7 +20,8 @@
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('id', data.id);
         sessionStorage.setItem('first_name', data.first_name);
-        window.location.href = '/classes';
+        sessionStorage.setItem('is_admin', data.is_admin);
+        window.location.href = '/';
       });
     });
 })();

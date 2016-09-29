@@ -40,6 +40,7 @@ router.get('/viewuser', function (req, res, next) {
   .select()
   .then((results) => {
     renderObject = results[0];
+    renderObject.is_admin = req.session.user.is_admin;
     console.log('renderObject: ', renderObject);
     res.render('user_profile', {renderObject});
   })
@@ -69,7 +70,8 @@ router.post('/signup', function (req, res, next) {
     zip: req.body.zip,
     liability: req.body.liability,
     comments: req.body.comments,
-    password: hash
+    password: hash,
+    is_admin: req.body.is_admin
   })
   .then((results) => {
       if (results) {
@@ -105,13 +107,15 @@ router.post('/signin', function (req, res, next) {
       req.session.user = {
         email: results[0].email,
         first_name: results[0].first_name,
-        id: results[0].id
+        id: results[0].id,
+        is_admin: results[0].is_admin
       };
 
       var renderObject = {
         email: results[0].email,
         first_name: results[0].first_name,
-        id: results[0].id
+        id: results[0].id,
+        is_admin: results[0].is_admin
       };
 
       var url = '/users/' + results[0].id;
