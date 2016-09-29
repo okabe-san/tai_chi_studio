@@ -98,12 +98,14 @@ router.get('/:id/class', function (req, res, next) {
   .where('classes.id', id)
   .select('*', 'classes.id')
   .then((results) => {
+    //console.log('RESULTS FROM CLASS INS JOIN', results);
     knex('users')
     .join('classes_users', 'classes_users.user_id', 'users.id')
     .join('classes', 'classes.id', 'classes_users.class_id')
     .where('classes.id', id)
     .select('*')
     .then((data) => {
+      //console.log('RESULTS FROM USER/CU JOIN', data);
       const renderObject = {};
       renderObject.classes = results;
       renderObject.users = data;
@@ -117,6 +119,7 @@ router.get('/:id/class', function (req, res, next) {
 
 //gets ONE class to delete using button
 router.delete('/:id/class/delete', function (req, res, next) {
+  console.log('HITTING THE DELETE CLASS ROUTE');
   const id = parseInt(req.params.id);
   knex('classes')
   .del()
@@ -274,5 +277,34 @@ router.post('/:id/class/edit', (req, res, next) => {
       return next(err);
     });
   });
+
+router.delete('/:id/class/delete/user', function (req, res, next) {
+  console.log('DATA GOT FROM AJAX REQUEST', req.body);
+  const userID = parseInt(req.body.user_id);
+  const classID = parseInt(req.body.classes_id);
+  knex('classes_users')
+  .where({
+    user_id: userID,
+    class_id: classID
+  })
+  .returning('*')
+  .then((results) => {
+    knex('classes_users')
+    .del()
+    .where('user_id', userID)
+    .where('class_id', classID)
+    .returning('*')
+    .then((results) => {
+      console.log(results);
+      res.send({
+        message: 'Delete was successful.'
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return next(err);
+    })
+  });
+});
 
 module.exports = router;
