@@ -1,31 +1,31 @@
 exports.seed = function(knex, Promise) {
   return Promise.all([
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 95).select('id'),
+      user_id: knex('users').where('id', 115).select('id'),
       class_id: knex('classes').where('id', 101).select('id')
     }),
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 96).select('id'),
+      user_id: knex('users').where('id', 116).select('id'),
       class_id: knex('classes').where('id', 102).select('id')
     }),
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 97).select('id'),
+      user_id: knex('users').where('id', 117).select('id'),
       class_id: knex('classes').where('id', 103).select('id')
     }),
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 98).select('id'),
+      user_id: knex('users').where('id', 118).select('id'),
       class_id: knex('classes').where('id', 104).select('id')
     }),
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 99).select('id'),
+      user_id: knex('users').where('id', 119).select('id'),
       class_id: knex('classes').where('id', 106).select('id')
     }),
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 100).select('id'),
+      user_id: knex('users').where('id', 120).select('id'),
       class_id: knex('classes').where('id', 107).select('id')
     }),
     knex('classes_users').insert({
-      user_id: knex('users').where('id', 101).select('id'),
+      user_id: knex('users').where('id', 121).select('id'),
       class_id: knex('classes').where('id', 108).select('id')
     }),
     knex('classes_users').insert({
