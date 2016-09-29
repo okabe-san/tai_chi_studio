@@ -109,6 +109,8 @@ router.get('/:id/class', function (req, res, next) {
       const renderObject = {};
       renderObject.classes = results;
       renderObject.users = data;
+      renderObject.user = req.session.user;
+      console.log('in classes: ', renderObject);
       res.render('classes/class', renderObject);
     });
   })
