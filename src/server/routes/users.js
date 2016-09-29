@@ -146,10 +146,24 @@ router.get('/view', function (req, res, next) {
 });
 
 router.get('/edit/user_edit_profile', function (req, res, next) {
-    console.log('here in edit with req: ', req.session);
-    console.log('here in user edit profile');
+    console.log('here in edit with req: ', req.session.user);
+    var renderObject = {};
 
-    res.render('user_edit_profile');
+    knex('users')
+    .where({
+      email: req.session.user.email
+    })
+    .select()
+    .then((results) => {
+      renderObject = results[0];
+      console.log('renderObject: ', renderObject);
+      res.render('user_edit_profile', {renderObject});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500);
+        res.render('validation/signin');
+      });
   });
 
 router.get('/user/logout', (req, res, next) => {
