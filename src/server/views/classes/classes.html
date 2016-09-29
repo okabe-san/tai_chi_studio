@@ -26,30 +26,30 @@
   </div>
   <div class="schedule">
   {% for i in range (6,10) %}
-    <div class="row">
-      <div class="timeBlock 0{{i}}:00am">
+    <div class="row timeRow" id="0{{i}}00am">
+      <div class="timeBlock 0{{i}}00am">
         <h4>{{i}}:00 am</h4>
       </div>
     </div>
   {% endfor %}
-    <div class="row">
+    <div class="row timeRow" id="1000am">
       <div class="timeBlock 10:00am">
         <h4>10:00 am</h4>
       </div>
     </div>
-    <div class="row">
+    <div class="row timeRow">
       <div class="timeBlock 11:00am">
         <h4>11:00 am</h4>
       </div>
     </div>
-    <div class="row">
+    <div class="row timeRow">
       <div class="timeBlock 12:00pm">
         <h4>12:00 pm</h4>
       </div>
     </div>
   {% for i in range (1,10) %}
-    <div class="row">
-      <div class="timeBlock 0{{i}}:00pm">
+    <div class="row timeRow" id="0{{i}}00pm">
+      <div class="col-md-1 timeBlock 0{{i}}00pm">
         <h4>{{i}}:00 pm</h4>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
   {% for class in classes %}
     {% if class.day === "Monday" %}
-    <div class="row">
+
       <div class="col-md-3 classBlock {{class.start_time}}">
       <h4>{{class.name}}</h4>
         {% for instructor in instructors %}
@@ -70,7 +70,7 @@
         <section>Start: {{class.start_time}}</section>
         <section>End: {{class.end_time}}</section>
       </div>
-    </div>
+
     {% endif %}
   {% endfor %}
 
