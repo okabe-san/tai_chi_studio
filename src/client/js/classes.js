@@ -1,15 +1,16 @@
 $(document).on('ready', () => {
     console.log('connected to classes.js');
     function appendSchedule($id, $className) {
-      $($id).appendTo($($className))
+      return $($id).appendTo($($className))
     }
     function secretary() {
       for (let i = 6; i < 12; i++) {
-        if(i > 9){
-          appendSchedule($(('.'+ i + '00am')), $(('#' + i + '00am'))
+        if(i > 9) {
+          appendSchedule($('.'+ i + '00am'), $('#' + i + '00am'))
         }
-        else
-        appendSchedule($(('.0'+ i + '00am')), $(('#0' + i + '00am'))
+        else {
+          appendSchedule($('.0'+ i + '00am'), $('#0' + i + '00am'))
+        }
       }
     }
 
