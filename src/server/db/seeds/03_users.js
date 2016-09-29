@@ -21,9 +21,9 @@ function createAdmin (knex) {
     zip: '80112',
     comments: 'do not share this account info',
     password: 'password',
-    is_admin: true;
+    is_admin: true
   });
-
+}
 function createUser (knex) {
   return knex('users')
     .insert({
