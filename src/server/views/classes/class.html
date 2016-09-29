@@ -3,7 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-
+{{user.is_admin}}
   <div class="container">
 
     <div class="row">
@@ -14,6 +14,7 @@
         <h2>{{class.name}}</h2><br><br>
         <img src="../../images/{{class.photo_url}}" alt="instructor photo">
       </div>
+
       <div class="col-md-7">
           <br><br>
           <p>Instructor: {{class.names}}</p>
@@ -28,8 +29,8 @@
       </div>
     </div>
     <br><br>
-    {{user.is_admin}}
     {% if user.is_admin %}
+
     test
     <div class="row">
       <div class="col-md-12">
