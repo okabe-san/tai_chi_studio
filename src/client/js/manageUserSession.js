@@ -8,4 +8,5 @@
   } else {
     $('#loginLink > a').replaceWith('<li class="current-menu-item" id="loginLink"><a href="/users/signin">Log In</a></li>');
   }
+
 })();
