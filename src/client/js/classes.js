@@ -4,5 +4,5 @@ $(document).on('ready', () => {
 $(window).scroll(function() {
     $('.dayScroll')
     .css('opacity', 1 - $(window)
-    .scrollTop() / 100);
+    .scrollTop() / 250);
   });

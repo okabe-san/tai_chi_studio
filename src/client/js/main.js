@@ -17,9 +17,7 @@ $(document).on('click', '.delete_class', function() {
 });
 
 $(document).on('click', '.delete-instructor', function() {
-
   const answer = confirm('Are you sure? This can\'t be undone');
-
   if (answer) {
     let tempId = document.getElementById('deleteId');
     const id = parseInt(tempId.value);
@@ -34,6 +32,29 @@ $(document).on('click', '.delete-instructor', function() {
       console.log(err);
     });
   }
+});
+
+$('.delete-user').on('click', function(e) {
+  e.preventDefault();
+  const userID = $(this).attr('data-id');
+  console.log('You clicked on user ', userID);
+  const classID = $('#single_class_id').val();
+  console.log('This is class number ', classID);
+  const removeUser = {
+    user_id: userID,
+    classes_id: classID
+  };
+  $.ajax({
+    type: 'DELETE',
+    data: removeUser,
+    url: `/classes/${classID}/class/delete/user`
+  })
+  .done((data) => {
+    window.location.href = `/classes/${classID}/class`;
+  })
+  .fail((err) => {
+    console.log(err);
+  });
 });
 
 $(document).on('click', '.edit-instructor', function() {
@@ -68,7 +89,7 @@ $('#edit_class_func').on('click', function(e) {
 
   $.ajax({
     type: 'POST',
-    url: `/classes/${id}/class/edit`,
+    url: `/classes/${id}/edit`,
     data: update
   })
   .done((data) => {
