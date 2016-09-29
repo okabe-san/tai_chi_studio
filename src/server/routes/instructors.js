@@ -21,9 +21,11 @@ router.get('/', function (req, res, next) {
         });
       });
       const renderObject = {};
+      renderObject.admin = req.session.user;
       renderObject.instructor = data;
       res.render('instructors/instructors', renderObject);
     });
+
   })
   .catch((err) => {
     console.log(err);

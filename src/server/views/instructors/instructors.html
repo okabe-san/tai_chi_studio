@@ -14,30 +14,33 @@
         <hr>
     </div>
     {% endfor %}
-    <div class="col-xs-12 col-md-5 addmin">
-      <h1>Admin Area</h1>
-      <h3><a href="/instructors/new" type="button" class="btn btn-primary">Add New instructor</a></h3>
-      <button class="btn btn-primary edit-instructor">Edit instructor</button>
-      Please select an instructor from a dropdow menu.
-      <br>
-      <select id="editId" class="form-control">
-      {% for instructor in instructor %}
-        <option value="{{instructor.id}}">
-        {{instructor.names}}
-        </option>
-      {% endfor %}
-      </select>
-      <br>
-      <button class="btn btn-sm btn-primary delete-instructor">Delete</button>
-      Please select an instructor from a dropdow menu.
-      <select id="deleteId" class="form-control">
-      {% for instructor in instructor %}
-        <option value="{{instructor.id}}">
-        {{instructor.names}}
-        </option>
-      {% endfor %}
-      </select>
-    </div>
+    {% if admin.is_admin %}
+    <div hidden class="sessionCheck"></div>
+      <div class="col-xs-12 col-md-5 addmin">
+        <h1>Admin Area</h1>
+        <h3><a href="/instructors/new" type="button" class="btn btn-primary">Add New instructor</a></h3>
+        <button class="btn btn-primary edit-instructor">Edit instructor</button>
+        Please select an instructor from a dropdow menu.
+        <br>
+        <select id="editId" class="form-control">
+        {% for instructor in instructor %}
+          <option value="{{instructor.id}}">
+          {{instructor.names}}
+          </option>
+        {% endfor %}
+        </select>
+        <br>
+        <button class="btn btn-sm btn-primary delete-instructor">Delete</button>
+        Please select an instructor from a dropdow menu.
+        <select id="deleteId" class="form-control">
+        {% for instructor in instructor %}
+          <option value="{{instructor.id}}">
+          {{instructor.names}}
+          </option>
+        {% endfor %}
+        </select>
+      </div>
+    {% endif %}
   </div>
 
 {% endblock %}

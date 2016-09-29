@@ -10,6 +10,7 @@
 
       <div class="col-md-5">
       {% for class in classes %}
+         <input type="hidden" value="{{class.id}}" name="id" id="single_class_id">
         <h2>{{class.name}}</h2><br><br>
         <img src="../../images/{{class.photo_url}}" alt="instructor photo">
       </div>
@@ -60,7 +61,7 @@
             <td>{{user.state}}</td>
             <td>{{user.zip}}</td>
             <td>{{user.comments}}</td>
-            <td><a href=""><button type="button" class="btn btn-danger delete_user btn-sm" name="{{user.id}}" data-id={{user.id}}>Remove Student from Class</button></a></td>
+            <td><a href=""><button type="button" class="btn btn-danger delete-user btn-sm" name="{{user.user_id}}" data-id={{user.user_id}}>Remove Student from Class</button></a></td>
           </tr>
           {% endfor %}
         </table>
