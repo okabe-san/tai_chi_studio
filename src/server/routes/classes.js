@@ -99,6 +99,7 @@ router.get('/:id/class', function (req, res, next) {
   .select('*', 'classes.id')
   .where('classes.id', id)
   .then((results) => {
+    console.log('RESULTS------', results);
     const renderObject = {};
     if (results.length === 0) {
       console.log(results);
