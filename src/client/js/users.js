@@ -1,8 +1,6 @@
 
 (function () {
-
     console.log('users sign up sanity check!');
-
     $('#saveUserButton').on('click', (event) => {
       event.preventDefault();
 
