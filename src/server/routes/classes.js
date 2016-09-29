@@ -91,28 +91,27 @@ router.post('/', (req, res, next) => {
     });
 });
 
-//gets ONE class
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
   knex('classes')
   .join('instructors', 'instructors.id', 'instructor_id')
-  .select('*', 'classes.id')
   .where('classes.id', id)
+  .select('*', 'classes.id')
   .then((results) => {
-    console.log('RESULTS------', results);
-    const renderObject = {};
-    if (results.length === 0) {
-      console.log(results);
-      renderObject.noclasses = 'There was no class found.';
-      res.render('classes/classes', renderObject);
-    } else {
+    knex('users')
+    .join('classes_users', 'classes_users.user_id', 'users.id')
+    .join('classes', 'classes.id', 'classes_users.class_id')
+    .where('classes.id', id)
+    .select('*')
+    .then((data) => {
+      const renderObject = {};
       renderObject.classes = results;
+      renderObject.users = data;
       res.render('classes/class', renderObject);
-    }
+    });
   })
   .catch((err) => {
     console.log(err);
-    return next(err);
   });
 });
 
