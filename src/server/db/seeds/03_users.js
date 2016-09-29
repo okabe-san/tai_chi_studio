@@ -1,9 +1,10 @@
 const faker = require('faker');
-
+var count = 0;
 exports.seed = function(knex, Promise) {
     let numberOfArrays = new Array(20);
     let arrayOfuser = Array.from(numberOfArrays).map(() => {
-      return createUser(knex);
+      count += 1;
+      return createUser(knex, count);
     });
     createAdmin(knex);
     return Promise.all(arrayOfuser);
@@ -24,9 +25,10 @@ function createAdmin (knex) {
     is_admin: true
   });
 }
-function createUser (knex) {
+function createUser (knex, id) {
   return knex('users')
     .insert({
+      id: id,
       first_name: faker.name.firstName(),
       last_name: faker.name.lastName(),
       email: faker.internet.email(),

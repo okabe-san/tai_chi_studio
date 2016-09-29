@@ -9,14 +9,14 @@ $(document).on('ready', () => {
         timeArr[0] = parseInt(timeArr[0]);
         timeArr[0] -= 12;
         timeArr[0] = timeArr[0].toString();
-        return timeArr.join(':') + ' pm';
+        return timeArr.join(':') + 'pm';
       }
       else if (+timeArr[0] === 0) {
         timeArr[0] = '12';
-        return timeArr.join(':') + ' am';
+        return timeArr.join(':') + 'am';
       }
       else {
-        return initialTime + ' am';
+        return initialTime + 'am';
       }
     }
     const className = $('.nameOfClass option:selected').val();
