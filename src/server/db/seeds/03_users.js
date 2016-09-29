@@ -5,8 +5,24 @@ exports.seed = function(knex, Promise) {
     let arrayOfuser = Array.from(numberOfArrays).map(() => {
       return createUser(knex);
     });
+    createAdmin(knex);
     return Promise.all(arrayOfuser);
   };
+
+function createAdmin (knex) {
+  return knex('users').insert({
+    first_name: 'admin',
+    last_name: 'admin',
+    email: 'admin@admin.com',
+    address_line_1: 'admin',
+    address_line_2: 'admin',
+    city: 'Denver',
+    state: 'CO',
+    zip: '80112',
+    comments: 'do not share this account info',
+    password: 'password',
+    is_admin: true;
+  });
 
 function createUser (knex) {
   return knex('users')
