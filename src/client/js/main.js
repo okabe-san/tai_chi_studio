@@ -34,6 +34,29 @@ $(document).on('click', '.delete-instructor', function() {
   }
 });
 
+$('.add_user_to_class').on('click', function(e) {
+  e.preventDefault();
+  //console.log('You clicked the add a user button!!!');
+  const classID = $(this).attr('data-id');
+  //console.log('The class number is ', classID);
+  const payload = {
+    class_id: classID
+  };
+  $.ajax({
+    type: 'POST',
+    data: payload,
+    url: `/classes/class/addUserToClass`
+  })
+  .done((data) => {
+    console.log('INTHEDONEDATACLICKFUNCTION');
+    console.log(data);
+    $('.alertuser').append('<p>You must be logged in to sign up for a class</p>');
+  })
+  .fail((err) => {
+    console.log(err);
+  });
+});
+
 $('.delete-user').on('click', function(e) {
   e.preventDefault();
   const userID = $(this).attr('data-id');
@@ -76,7 +99,6 @@ $('#edit_class_func').on('click', function(e) {
   const id = $('#id').attr('value');
   console.log(id);
   console.log(`classes/${id}/class/edit`);
-
   const update = {
     name: updatedClassName,
     description: updatedDescription,
@@ -86,7 +108,6 @@ $('#edit_class_func').on('click', function(e) {
     end_time: updatedEnd_time,
     size: updatedSize
   };
-
   $.ajax({
     type: 'POST',
     url: `/classes/${id}/edit`,

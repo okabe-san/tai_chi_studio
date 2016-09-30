@@ -218,6 +218,11 @@ footer {
   margin-left: 150px;
 }
 
+
+.alertuser {
+  color: #FF0000;
+}
+
 #sign_in_password {
   float: right;
   margin-top: 20px;
