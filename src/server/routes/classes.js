@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 const userFunctions = require('../controllers/index');
+const checkUser = require('../controllers/notsignedin');
+
 const chen = 'Chen style tai chi movements of the Chen Style\'s first level of training are done in slow motion. The Chen style alternates slow-motion movements with short, fast, explosive ones. It demands more physical coordination and may strain the lower back and knees more than other styles; consequently, it is difficult for the elderly or injured to learn. The complexity of its movements, which include fast releases combined with jumping kicks and stamping actions, makes it more athletic and physically difficult than most other tai chi styles and, as such, is often more appealing to young people or martial artists.';
 
 const wu = 'Wu style tai chi is the second most popular style. It has three main variations with strong stylistic differences that derived from the founder, Chuan You, his son, Wu Jien Chuan, and his grandchildren. The Wu style was created directly from the Yang and, as such, is the largest variant of the Yang style. However, unlike most traditions in the Yang style, most Wu schools emphasize small, compact movements over large and medium-sized ones. The Yang and Wu, with all their variations, encompass the vast majority (80 percent or more) of all tai chi practitioners.';
@@ -60,12 +62,12 @@ router.get('/new',(req, res, next) => {
     renderObject.classNames = results[2];
     renderObject.classDays = results[3];
     res.render('classes/newclass', renderObject);
-    console.log(results[3]);
+    //console.log(results[3]);
   });
 });
 
 router.post('/', (req, res, next) => {
-  console.log('post ', req.body);
+  //console.log('post ', req.body);
   const className = req.body.name;
   const description = req.body.description;
   const instructor_id = req.body.instructor_id;
@@ -94,6 +96,40 @@ router.post('/', (req, res, next) => {
     });
 });
 
+//add a user to a class
+router.post('/class/addUserToClass', checkUser.checkSignIn, function (req, res, next) {
+  console.log('BACK IN THE POST AFTER CHECKING SIGN IN');
+  if (!req.body.err) {
+    const userID = req.session.user.id;
+    const classID = req.body.class_id;
+    knex('classes_users')
+    .insert({
+      class_id: classID,
+      user_id: userID
+    })
+    .then((data) => {
+      console.log('DATE BEING ENTERED IN DB', data);
+      res.json({
+        message: 'User was added to the class.'
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    });
+  } else {
+    console.log('err');
+    var renderObject = {};
+    renderObject.alertUser = 'You must be signed in to enroll in a class.';
+    console.log('renderObject', renderObject);
+    res.json({
+      message: renderObject
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+});
+
 router.get('/:id/class', function (req, res, next) {
   const id = parseInt(req.params.id);
   knex('classes')
@@ -113,7 +149,7 @@ router.get('/:id/class', function (req, res, next) {
       renderObject.classes = results;
       renderObject.users = data;
       renderObject.user = req.session.user;
-      console.log('in classes: ', renderObject);
+      //console.log('in classes: ', renderObject);
       res.render('classes/class', renderObject);
     });
   })
@@ -124,14 +160,14 @@ router.get('/:id/class', function (req, res, next) {
 
 //gets ONE class to delete using button
 router.delete('/:id/class/delete', function (req, res, next) {
-  console.log('HITTING THE DELETE CLASS ROUTE');
+  //console.log('HITTING THE DELETE CLASS ROUTE');
   const id = parseInt(req.params.id);
   knex('classes')
   .del()
   .where('id', id)
   .returning('*')
   .then((result) => {
-    console.log('item you deleted', result);
+    //console.log('item you deleted', result);
     const id = result[0].instructor_id;
     knex('classes')
     .where('id', id)
@@ -274,7 +310,7 @@ router.post('/:id/class/edit', (req, res, next) => {
     })
     .returning('*')
     .then((results) => {
-      console.log('UPDATE: ', results);
+      //console.log('UPDATE: ', results);
       res.redirect('/classes');
     })
     .catch((err) => {
@@ -284,7 +320,7 @@ router.post('/:id/class/edit', (req, res, next) => {
   });
 
 router.delete('/:id/class/delete/user', function (req, res, next) {
-  console.log('DATA GOT FROM AJAX REQUEST', req.body);
+  //console.log('DATA GOT FROM AJAX REQUEST', req.body);
   const userID = parseInt(req.body.user_id);
   const classID = parseInt(req.body.classes_id);
   knex('classes_users')
