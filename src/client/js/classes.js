@@ -32,7 +32,7 @@ $(document).on('ready', () => {
     filterDay('wed', 'Wednesday');
     filterDay('thurs', 'Thursday');
     filterDay('fri', 'Friday');
-
+    //no longer friends these two functions mehhehe
     secretary('am');
     secretary('pm');
 });
