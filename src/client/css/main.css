@@ -217,3 +217,43 @@ footer {
   margin-top: 80px;
   margin-left: 150px;
 }
+
+#sign_in_password {
+  float: right;
+  margin-top: 20px;
+}
+
+.personalInfo{
+  float: right;
+  margin-top: 20px;
+}
+
+#userLabel {
+  margin-top: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#signInButton {
+  float: right;
+  margin-top: 20px;
+}
+
+.somethingThatWorks {
+  margin-top: 80px;
+}
+
+#editProfile {
+  margin-top: 10px;
+  padding-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.userInfo {
+  float: left;
+  margin-top: 20px;
+  display: inline-block;
+}
