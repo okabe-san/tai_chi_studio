@@ -3,28 +3,29 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+
 <div class="container">
 <form class="form-horizontal">
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+      <label for="inputEmail" class="col-lg-2 control-label">Email (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="email" name="email" placeholder="Email">
       </div>
     </div>
     <div class="form-group">
-      <label for="first_name" class="col-lg-2 control-label">First Name</label>
+      <label for="first_name" class="col-lg-2 control-label">First Name (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="firstName" name="firstName">
       </div>
     </div>
     <div class="form-group">
-      <label for="last_name" class="col-lg-2 control-label">Last Name</label>
+      <label for="last_name" class="col-lg-2 control-label">Last Name (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="lastName" name="lastName">
       </div>
     </div>
     <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">Street Address 1</label>
+      <label for="address_line_1" class="col-lg-2 control-label">Street Address 1 (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="line_1" name="address_line_1">
       </div>
@@ -36,19 +37,19 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">City</label>
+      <label for="address_line_1" class="col-lg-2 control-label">City (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="city" name="city">
       </div>
     </div>
     <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">State</label>
+      <label for="address_line_1" class="col-lg-2 control-label">State (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="state" name="state">
       </div>
     </div>
     <div class="form-group">
-      <label for="address_line_1" class="col-lg-2 control-label">Zip</label>
+      <label for="address_line_1" class="col-lg-2 control-label">Zip (require)</label>
       <div class="col-lg-10">
         <input type="text" class="form-control" id="zip" name="zip">
       </div>
@@ -60,7 +61,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+      <label for="inputPassword" class="col-lg-2 control-label">Password (require)</label>
       <div class="col-lg-10">
         <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
       </div>
@@ -71,6 +72,8 @@
           <input type="checkbox" name="tc_checkbox" id="tc_checkbox"> Accept Terms and Conditions
         </div>
       </div>
+    <div class="validation"></div>
+    <br>
     <div class="form-group">
       <input type="button"  id="saveUserButton" method="post" activity="/users/edit_user" value="Save">
       <input type="button" value="Cancel" method="get" activity="/">

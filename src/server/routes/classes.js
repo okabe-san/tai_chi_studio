@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
   .then((results) => {
     const renderObject = {};
     renderObject.classes = results[0].map(function(el) {
-      el.start_time = el.start_time.replace(':', '')
+      el.start_time = el.start_time.replace(':', '');
       return el;
     });
     renderObject.instructors = results[1];

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
 const bcrypt = require('bcrypt');
+const validation = require('./validations');
 
 //get the the page that allows a user to sign up with the studio (new user)
 router.get('/signup', function (req, res, next) {
@@ -52,11 +53,10 @@ router.get('/viewuser', function (req, res, next) {
 });
 
 //get the the page that allows a user to sign up with the studio (new user)
-router.post('/signup', function (req, res, next) {
+router.post('/signup', validation.checkValidation, function (req, res, next) {
   // Hash the password with the salt
   //we should use bcrypt here to store the password
   var hash = bcrypt.hashSync(req.body.password, 10);
-
   knex('users')
   .returning('id')
   .insert({
@@ -74,21 +74,21 @@ router.post('/signup', function (req, res, next) {
     is_admin: req.body.is_admin
   })
   .then((results) => {
-      if (results) {
-        console.log('Success results: ', results);
-        res.json({ results });
-      } else {
-        res.status(500).send({
-          status: 'error',
-          message: 'error'
-        });
-      }
-    })
+    if (results) {
+      console.log('Success results: ', results);
+      res.json({ results });
+    } else {
+      res.status(500).send({
+        status: 'error',
+        message: 'error'
+      });
+    }
+  })
   .catch((err) => {
-      console.log(err);
-      res.status(500);
-      res.render('validation/signup');
-    });
+    console.log(err);
+    res.status(500);
+    res.render('validation/signup');
+  });
 });
 
 //gets to the page that allows a user to log in (not a new user)
