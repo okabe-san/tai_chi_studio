@@ -249,7 +249,11 @@ footer {
   padding-top: 20px;
   margin-bottom: 5px;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 12px;
+}
+
+#saveButtons {
+  margin: 20px 0 20px 0;
 }
 
 .userInfo {
