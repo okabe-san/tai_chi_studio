@@ -6,10 +6,10 @@ $(document).on('ready', () => {
     function secretary(meridian) {
       for (let i = 1; i < 12; i++) {
         if (i >= 10) {
-          appendSchedule($('.'+ i + '00' + meridian), $('#' + i + '00' + meridian));
+          appendSchedule($('.' + i + '00' + meridian), $('#' + i + '00' + meridian));
         }
         else {
-          appendSchedule($('.0'+ i + '00' + meridian), $('#0' + i + '00' + meridian));
+          appendSchedule($('.0' + i + '00' + meridian), $('#0' + i + '00' + meridian));
         }
       }
     }
@@ -22,7 +22,7 @@ $(document).on('ready', () => {
           // $('.' + dayAbbrev).fadeIn('slow').css('background-color', '#dbdbdb');
         }
         else {
-          $('.' + day).fadeIn('slow').css('display', 'block')
+          $('.' + day).fadeIn('slow').css('display', 'block');
         }
       });
     }
@@ -35,4 +35,4 @@ $(document).on('ready', () => {
 
     secretary('am');
     secretary('pm');
-});
+  });
