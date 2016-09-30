@@ -1,3 +1,7 @@
+// $(document).redy(function () {
+//    sessionStorage.setItem
+// })
+
 (function () {
   let rating = '';
   $(document).on('click', '.star', function (e) {

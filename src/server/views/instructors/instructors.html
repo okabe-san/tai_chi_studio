@@ -5,6 +5,7 @@
 {% block content %}
 
   <div class="container">
+    <div class="validation">{{ error }}</div>
     <h2>Instructors</h2>
     {% for instructor in instructor %}
     <div class="col-xs-12 col-md-4 window">
@@ -15,7 +16,6 @@
     </div>
     {% endfor %}
     {% if admin.is_admin %}
-    <div hidden class="sessionCheck"></div>
       <div class="col-xs-12 col-md-5 addmin">
         <h1>Admin Area</h1>
         <h3><a href="/instructors/new" type="button" class="btn btn-primary">Add New instructor</a></h3>
