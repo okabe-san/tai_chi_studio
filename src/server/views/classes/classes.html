@@ -8,42 +8,42 @@
     <a href="/classes/new">Add a new class</a>
   </div>
   <div class="row">
-    <div class="col-md-2 col-md-offset-1">
+    <div class="weekDayHeader mon col-md-2 col-md-offset-1">
       <h1>Mon</h1>
     </div>
-    <div class="col-md-2">
+    <div class="weekDayHeader tues col-md-2">
       <h1>Tues</h1>
     </div>
-    <div class="col-md-2">
+    <div class="weekDayHeader wed col-md-2">
       <h1>Wed</h1>
     </div>
-    <div class="col-md-2">
+    <div class="weekDayHeader thurs col-md-2">
       <h1>Thurs</h1>
     </div>
-    <div class="col-md-2">
+    <div class="weekDayHeader fri col-md-2">
       <h1>Fri</h1>
     </div>
   </div>
   <div class="schedule">
   {% for i in range (6,10) %}
     <div class="row timeRow" id="0{{i}}00am">
-      <div class="timeBlock 0{{i}}00am">
+      <div class="col-md-1 timeBlock 0{{i}}00am">
         <h4>{{i}}:00 am</h4>
       </div>
     </div>
   {% endfor %}
     <div class="row timeRow" id="1000am">
-      <div class="timeBlock 10:00am">
+      <div class="col-md-1 timeBlock 10:00am">
         <h4>10:00 am</h4>
       </div>
     </div>
     <div class="row timeRow">
-      <div class="timeBlock 11:00am">
+      <div class="col-md-1 timeBlock 11:00am">
         <h4>11:00 am</h4>
       </div>
     </div>
     <div class="row timeRow">
-      <div class="timeBlock 12:00pm">
+      <div class="col-md-1 timeBlock 12:00pm">
         <h4>12:00 pm</h4>
       </div>
     </div>
@@ -56,11 +56,12 @@
   {% endfor %}
   </div>
 
+<!-- MONDAY CLASSES  -->
 
   {% for class in classes %}
     {% if class.day === "Monday" %}
 
-      <div class="col-md-3 classBlock {{class.start_time}}">
+      <div class="col-md-3 classBlock {{class.start_time}} {{class.day}}">
       <h4>{{class.name}}</h4>
         {% for instructor in instructors %}
           {% if instructor.id === class.instructor_id%}
@@ -69,15 +70,18 @@
         {% endfor %}
         <section>Start: {{class.start_time}}</section>
         <section>End: {{class.end_time}}</section>
+        <section class="addSchedule id{{class.id}}">+</secion>
       </div>
 
     {% endif %}
   {% endfor %}
 
+<!-- TUESDAY CLASSES -->
+
   {% for class in classes %}
     {% if class.day === "Tuesday" %}
-    <div class="row">
-      <div class="classBlock">
+
+      <div class="col-md-3 classBlock {{class.start_time}} {{class.day}}">
       <h4>{{class.name}}</h4>
         {% for instructor in instructors %}
           {% if instructor.id === class.instructor_id%}
@@ -86,15 +90,16 @@
         {% endfor %}
         <section>Start: {{class.start_time}}</section>
         <section>End: {{class.end_time}}</section>
+        <section class="addSchedule id{{class.id}}">+</secion>
       </div>
-    </div>
+
     {% endif %}
   {% endfor %}
 
   {% for class in classes %}
     {% if class.day === "Wednesday" %}
-    <div class="row">
-      <div class="classBlock">
+
+      <div class="col-md-3 classBlock {{class.start_time}} {{class.day}}">
       <h4>{{class.name}}</h4>
         {% for instructor in instructors %}
           {% if instructor.id === class.instructor_id%}
@@ -103,15 +108,16 @@
         {% endfor %}
         <section>Start: {{class.start_time}}</section>
         <section>End: {{class.end_time}}</section>
+        <section class="addSchedule id{{class.id}}">+</secion>
       </div>
-    </div>
+
     {% endif %}
   {% endfor %}
 
   {% for class in classes %}
     {% if class.day === "Thursday" %}
-    <div class="row">
-      <div class="classBlock">
+
+      <div class="col-md-3 classBlock {{class.start_time}} {{class.day}}">
       <h4>{{class.name}}</h4>
         {% for instructor in instructors%}
           {% if instructor.id === class.instructor_id%}
@@ -120,15 +126,16 @@
         {% endfor %}
         <section>Start: {{class.start_time}}</section>
         <section>End: {{class.end_time}}</section>
+        <section class="addSchedule id{{class.id}}">+</secion>
       </div>
-    </div>
+
     {% endif %}
   {% endfor %}
 
   {% for class in classes %}
     {% if class.day === "Friday" %}
-    <div class="row">
-      <div class="classBlock">
+
+      <div class="col-md-3 classBlock {{class.start_time}} {{class.day}}">
       <h4>{{class.name}}</h4>
         {% for instructor in instructors%}
           {% if instructor.id === class.instructor_id%}
@@ -137,8 +144,9 @@
         {% endfor %}
         <section>Start: {{class.start_time}}</section>
         <section>End: {{class.end_time}}</section>
+        <section class="addSchedule id{{class.id}}">+</secion>
       </div>
-    </div>
+
     {% endif %}
   {% endfor %}
 </div>
