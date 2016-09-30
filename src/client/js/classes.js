@@ -15,14 +15,25 @@ $(document).on('ready', () => {
     }
     function filterDay(dayAbbrev, day) {
       $('.' + dayAbbrev).on('click', function() {
-        $('.' + day).fadeIn('slow').css('display', 'block');
-      })
+        if ($('.weekDayHeader').data('clicked', true)) {
+          $('.classBlock').fadeOut('slow').css('display', 'none');
+          $('.' + day).fadeIn('slow').css('display', 'block');
+          // $('weekDayHeader').fadeOut('slow').css('background-color', '#f2f2f2');
+          // $('.' + dayAbbrev).fadeIn('slow').css('background-color', '#dbdbdb');
+        }
+        else {
+          $('.' + day).fadeIn('slow').css('display', 'block')
+        }
+      });
+
     }
+
     filterDay('mon', 'Monday');
     filterDay('tues', 'Tuesday');
     filterDay('wed', 'Wednesday');
     filterDay('thurs', 'Thursday');
     filterDay('fri', 'Friday');
+    
     secretary('am');
     secretary('pm');
 
