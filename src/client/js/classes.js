@@ -1,15 +1,15 @@
 $(document).on('ready', () => {
     console.log('connected to classes.js');
     function appendSchedule($id, $className) {
-      $($id).appendTo($($className))
+      $($id).appendTo($($className));
     }
     function secretary(meridian) {
       for (let i = 1; i < 12; i++) {
         if (i >= 10) {
-          appendSchedule($('.'+ i + '00' + meridian), $('#' + i + '00' + meridian))
+          appendSchedule($('.'+ i + '00' + meridian), $('#' + i + '00' + meridian));
         }
         else {
-          appendSchedule($('.0'+ i + '00' + meridian), $('#0' + i + '00' + meridian))
+          appendSchedule($('.0'+ i + '00' + meridian), $('#0' + i + '00' + meridian));
         }
       }
     }
@@ -25,7 +25,6 @@ $(document).on('ready', () => {
           $('.' + day).fadeIn('slow').css('display', 'block')
         }
       });
-
     }
 
     filterDay('mon', 'Monday');

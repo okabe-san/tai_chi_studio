@@ -126,6 +126,12 @@ header {
   font-size: 24px;
 }
 
+/* user form validation */
+.validation {
+  color: red;
+  font-size: 24px;
+}
+
 /* instractors page */
 .window {
   display: inline-block;
@@ -216,6 +222,11 @@ footer {
 .like-us {
   margin-top: 80px;
   margin-left: 150px;
+}
+
+
+.alertuser {
+  color: #FF0000;
 }
 
 #sign_in_password {

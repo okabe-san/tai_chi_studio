@@ -49,6 +49,10 @@
           sessionStorage.setItem('id', data.results[0]);
           sessionStorage.setItem('is_admin', data.results[0]);
           window.location.href = '/';
+        })
+        .fail((err) => {
+          $('.validation').append(JSON.parse(err.responseText).message);
+          console.log(err);
         });
       }
     });
