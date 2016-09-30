@@ -33,7 +33,7 @@ $(document).on('ready', () => {
     filterDay('wed', 'Wednesday');
     filterDay('thurs', 'Thursday');
     filterDay('fri', 'Friday');
-    
+
     secretary('am');
     secretary('pm');
 
