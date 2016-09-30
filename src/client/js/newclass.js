@@ -8,7 +8,8 @@ $(document).on('ready', () => {
       if (timeArr[0] > 12) {
         timeArr[0] = parseInt(timeArr[0]);
         timeArr[0] -= 12;
-        timeArr[0] = timeArr[0].toString();
+        timeArr[0] = '0' + timeArr[0].toString();
+
         return timeArr.join(':') + 'pm';
       }
       else if (+timeArr[0] === 0) {
